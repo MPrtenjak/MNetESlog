@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xds="http://uri.etsi.org/01903/v1.1.1#" xmlns:aesp="http://www.gzs.si" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.w3.org/2000/09/xmldsig#" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://uri.etsi.org/01903/v1.1.1#" schemaLocation="http://www.gzs.si/e-poslovanje/sheme/eSlog_1-5_EnostavniRacun_XAdES.xsd"/>
+	<xs:complexType name="DigestMethodType" mixed="true">
+		<xs:sequence>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Algorithm" type="xs:anyURI" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="DigestValueType">
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<xs:complexType name="X509IssuerSerialType">
+		<xs:sequence>
+			<xs:element name="X509IssuerName" type="xs:string"/>
+			<xs:element name="X509SerialNumber" type="xs:integer"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Signature">
+		<xs:annotation>
+			<xs:documentation>Podpis v formatu W3C XML Signature 1.0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SignedInfo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CanonicalizationMethod">
+								<xs:complexType>
+									<xs:attribute name="Algorithm" type="xs:anyURI" use="required"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="SignatureMethod">
+								<xs:complexType>
+									<xs:attribute name="Algorithm" type="xs:anyURI" use="required"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:sequence maxOccurs="unbounded">
+								<xs:element name="Reference">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="DigestMethod" type="DigestMethodType"/>
+											<xs:element name="DigestValue" type="DigestValueType"/>
+										</xs:sequence>
+										<xs:attribute name="URI" type="xs:anyURI" use="required"/>
+										<xs:attribute name="Id" type="xs:ID" use="optional"/>
+										<xs:attribute name="Type" type="xs:anyURI" use="optional"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="SignatureValue" type="xs:base64Binary"/>
+				<xs:element name="KeyInfo" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="X509Data">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="X509Certificate" type="xs:base64Binary"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Object">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="xds:QualifyingProperties"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,1933 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+GZS e-SLOG Enostavni racun 1.6 verzija 2, 1.6.2012 (Priporočila za uporabo standarda GZS eSlog 1.6 za enostavni račun, verzija 2012/1_4), 
+Spremembe iz e-SLOG Enostavni racun 1.5 v e-SLOG Enostavni racun 1.6 verzija 2:
+1.  Popravljen VrstaZneskaPostavke
+     Pobrisana koda 66. 
+     Spremenjen vrstni red kod.
+2.  Popravljen VrstaZneska 
+     Koda 11E zamenjana s kodo 402.   
+     Koda 26E zamenjana s kodo 396.   
+	 Spremenjen vrstni red kod.
+3.  VrstaRacuna
+     Dodane kode 387 in 38P.
+4 . VrstaKomunikacije
+	 Pobrisana koda TL.
+5.  VrstaKodeArtiklaDodatna
+     Koda EN zamenjana s kodo SRV.
+	 Dodana koda SN.
+6.  VrstaKodeArtikla
+     Koda EN zamenjana s kodo SRV.
+	 Pobrisana koda UP.
+7.  VrstaDokumentaPostavke
+     Koda CIN zamenjana s kodo AIZ.
+	 Koda COE zamenjana s kodo APQ.
+	 Koda VAT zamenjana s kodo VA.	 
+8.  VrstaDavkaPostavke
+	 Spremenjen vrstni red kod.
+9.  VrstaDokumenta
+     Koda CIN zamenjana s kodo AIZ.
+	 Koda COE zamenjana s kodo APQ.
+	 Dodane kode NAD in ZAH.
+	 Spremenjen vrstni red kod.
+10. EnotaMere
+     Koda ASV zamenjana s kodo ASU.
+	 Koda GJO zamenjana s kodo GV.
+	 Koda KMT zamenjana s kodo KTM.
+	 Koda PGE zamenjana s kodo ZP.
+	 Koda PPM zamenjana s kodo 59.
+	 Spremenjen vrstni red kod.
+11. Dodan opcijski element NacinPlacila v <Racun>/<GlavaRacuna>, dodana definicija elementa NacinPlacila
+12. Dodan opcijski element StroskovnoMesto v <Racun>/<GlavaRacuna>, dodana definicija elementa StroskovnoMesto
+13. Dodan opcijski element KodaNamena v <Racun>/<GlavaRacuna>, dodana definicija elementa KodaNamena
+14. Dodan opcijski element BIC v <Racun>/<PodatkiPodjetja>/<FinancniPodatkiPodjetja>/<BancniRacun>, dodana definicija elementa BIC
+15. Dodan opcijski element StroskovnoMesto v <Racun>/<PostavkeRacuna>
+16. Dodan opcijski element ObdobjeDobave v <Racun>/<PostavkeRacuna>, dodana definicija elementa ObdobjeDobave
+17. Dodan opcijski element DatumDokumenta v <Racun>/<PostavkeRacuna>/<ReferencniDokumentPostavke>
+18. Dodan opcijski element GlobalniPopusti v <Racun>
+19. Dodan opcijski element PopustiPostavke? Vprasaj Bostjana
+20. V vecini elementov popravljeni komentarji
+21. Element <Racun> je spremenjen iz opcijskega elementa v obvezen
+22. V element <Racun> dodan nov opcijski element <PoljubnoBesediloRazsirjeno> zaradi prenosa poljubnih podatkov v strukturirani obliki
+23. Razsiritev elementa <Racun>/<PodatkiPodjetja>/<NazivNaslovPodjetja>/<NazivDrzave> iz xs:string dolžine 9 v xs:string dolžine 35
+24. Identifikator
+	 Dodana koda P
+-->
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xds="http://uri.etsi.org/01903/v1.1.1#">
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.gzs.si/e-poslovanje/sheme/eSlog_1-5_EnostavniRacun_signature.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Schema name: IzdaniRacunEnostavni</xs:documentation>
+	</xs:annotation>
+	<xs:element name="ZneskiRacuna">
+		<xs:annotation>
+			<xs:documentation>Povzetek zneskov na racunu (koliko davka, davcne osnove, popustov,...) (E:Seg-MOA; E:Com-C516_3)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaZneska"/>
+				<xs:element ref="ZnesekRacuna" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ZneskiPostavke">
+		<xs:annotation>
+			<xs:documentation>Zneski na posamezni postavki (E:Loop-Group_26; E:Seg-MOA; E:Com-C516)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaZneskaPostavke"/>
+				<xs:element ref="ZnesekPostavke" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ZneskiDavkovPostavke">
+		<xs:annotation>
+			<xs:documentation>Znesek davka/trosarine na postavki (E:Seg-MOA; E:Com-C516)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaZneskaDavkaPostavke"/>
+				<xs:element ref="Znesek" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ZneskiDavkov">
+		<xs:annotation>
+			<xs:documentation>Znesek davka na racunu (E:Seg-MOA; E:Com-C516)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaZneskaDavka"/>
+				<xs:element ref="ZnesekDavka" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ZnesekRacuna">
+		<xs:annotation>
+			<xs:documentation>Znesek racuna (E:Loop-Group_41, E:Seg-MOA, E:Com-C516, E:El-5004)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,18}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ZnesekPostavke">
+		<xs:annotation>
+			<xs:documentation>Vrednost postavke (E:Loop-Group_41, E:Seg-MOA, E:Com-C516, E:El-5004)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,18}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ZnesekOdstotka">
+		<xs:annotation>
+			<xs:documentation>Vrednost odstotka postavke (E:Loop-Group_41, E:Seg-MOA, E:Com-C516, E:El-5004)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,18}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ZnesekDavka">
+		<xs:annotation>
+			<xs:documentation>Vrednost davka postavke (E:Loop-Group_41, E:Seg-MOA, E:Com-C516, E:El-5004)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,18}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Znesek">
+		<xs:annotation>
+			<xs:documentation>Vrednost postavke (E:Loop-Group_41, E:Seg-MOA, E:Com-C516, E:El-5004)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,18}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaZneskaPostavke">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta zneska postavke (38-končni znesek, 52-znesek s popustom, 125-obdavčljivi znesek, 165-popravek zneska, 
+			203-znesek s popustom in kaznijo, 262-obrok za plačilo, 400-znesek rabata) (E:El-5025)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="38"/>
+				<xs:enumeration value="52"/>
+				<xs:enumeration value="125"/>
+				<xs:enumeration value="165"/>
+				<xs:enumeration value="203"/>
+				<xs:enumeration value="262"/>
+				<xs:enumeration value="400"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaZneskaOdstotka">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta zneska odstotka (23-znesek provizije, 25-znesek osnove, 204-znesek popusta) (E:Loop-Group_41, E:Seg-MOA, E:Com-C516, E:El-5025)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="23"/>
+				<xs:enumeration value="25"/>
+				<xs:enumeration value="204"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaZneskaDavkaPostavke">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta zneska davka postavke (124-znesek davka, 125-osnova za davek, XB5-trosarina) (E:El-5025)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="124"/>
+				<xs:enumeration value="125"/>
+				<xs:enumeration value="XB5"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaZneskaDavka">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta zneska davka (77-znesek racuna, 79-skupna vrednost vrstic, 124-znesek davka, 125-osnova za davek, 176-skupen davek) (E:El-5025)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="77"/>
+				<xs:enumeration value="79"/>
+				<xs:enumeration value="124"/>
+				<xs:enumeration value="125"/>
+				<xs:enumeration value="176"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaZneska">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta zneska (9-znesek za placilo, 52-znesek popusta, 53-vsota zneskov popustov, 79-vsota vrednosti postavk brez popustov, 
+			86-koncni znesek, 113-znesek predplacila/dobropisa, 125-vsota osnov za DDV, 129-skupni znesek na katerega se prizna popust, 131-skupni popusti/kazni, 
+			165-izravnava, 176-vsota zneskov DDV, 262-obrok, 396-skupna vrednost vseh cenovnih subvencij, 400-znesek rabata, 402-skupna maloprodajna vrednost) (E:El-5025)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="9"/>
+				<xs:enumeration value="52"/>
+				<xs:enumeration value="53"/>
+				<xs:enumeration value="79"/>
+				<xs:enumeration value="86"/>
+				<xs:enumeration value="113"/>
+				<xs:enumeration value="125"/>
+				<xs:enumeration value="129"/>
+				<xs:enumeration value="131"/>
+				<xs:enumeration value="165"/>
+				<xs:enumeration value="176"/>
+				<xs:enumeration value="262"/>
+				<xs:enumeration value="396"/>
+				<xs:enumeration value="400"/>
+				<xs:enumeration value="402"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaValuteRacuna">
+		<xs:annotation>
+			<xs:documentation>Koda vrste valute racuna (2-valuta zneska racuna, 3-koncna valuta) (E:El-6347)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="2"/>
+				<xs:enumeration value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaRoka">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta roka (3-po datumu roka) (E:El-2009)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaRacuna">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta racuna (...325-predracun, 380-racun, 381-dobropis, 383-bremepis, 386-racun za predplacilo...) (C002_E1001)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="82"/>
+				<xs:enumeration value="83"/>
+				<xs:enumeration value="84"/>
+				<xs:enumeration value="130"/>
+				<xs:enumeration value="325"/>
+				<xs:enumeration value="380"/>
+				<xs:enumeration value="381"/>
+				<xs:enumeration value="382"/>
+				<xs:enumeration value="383"/>
+				<xs:enumeration value="384"/>
+				<xs:enumeration value="385"/>
+				<xs:enumeration value="386"/>
+				<xs:enumeration value="387"/>
+				<xs:enumeration value="389"/>
+				<xs:enumeration value="38P"/>
+				<xs:enumeration value="390"/>
+				<xs:enumeration value="393"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaPogoja">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta pogoja (1-osnovni 3-fiksni datum, 7-razsirjeno, 20-zamudne obresti, 22-popusti, 10E-popolno placilo) (E:El-4279)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="3"/>
+				<xs:enumeration value="7"/>
+				<xs:enumeration value="20"/>
+				<xs:enumeration value="22"/>
+				<xs:enumeration value="10E"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaPodatkaPodjetja">
+		<xs:annotation>
+			<xs:documentation>Koda vrsta podatka podjetja (AP-terjatveni racun, API-EANkoda, GN-maticna st., IA-interna dobaviteljeva st., IT-interna kupceva st., 
+			PY-st. placnikove financne institucije, VA-davcna st., XA-registracijska st.) (E:El-1153)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="AP"/>
+				<xs:enumeration value="API"/>
+				<xs:enumeration value="GN"/>
+				<xs:enumeration value="IA"/>
+				<xs:enumeration value="IT"/>
+				<xs:enumeration value="PY"/>
+				<xs:enumeration value="VA"/>
+				<xs:enumeration value="XA"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaPodatkaArtikla">
+		<xs:annotation>
+			<xs:documentation>Koda, ki definira dodatno informacijo o artiklu ali za drugo kodiranje (1-dodatna informacija, 5-identifikacija artikla) (E:El-4347)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="5"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaPeriode">
+		<xs:annotation>
+			<xs:documentation>Vrsta periode za rok (D-dnevi, M-meseci...) (E:El-2151)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="D"/>
+				<xs:enumeration value="M"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaPartnerja">
+		<xs:annotation>
+			<xs:documentation>Vrsta partnerja na racunu (BO-posrednik, BS-prejemnik racuna in blaga, BY-kupec, CN-prejemnik, CS-stranka/izvajalec konsolidacije, 
+			DP-prejemnik posiljke, II-izdajatelj racuna, IV-prejemnik racuna, PE-prejemnik placila, RE-stranka/prejemnik komercialnega racuna, SE-prodajalec, 
+			SN-skladisce, SR-zastopnik dobavitelja, ST-dostaviti do, SU-dobavitelj) (E:El-3035)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="BO"/>
+				<xs:enumeration value="BS"/>
+				<xs:enumeration value="BY"/>
+				<xs:enumeration value="CN"/>
+				<xs:enumeration value="CS"/>
+				<xs:enumeration value="DP"/>
+				<xs:enumeration value="II"/>
+				<xs:enumeration value="IV"/>
+				<xs:enumeration value="PE"/>
+				<xs:enumeration value="RE"/>
+				<xs:enumeration value="SE"/>
+				<xs:enumeration value="SN"/>
+				<xs:enumeration value="SR"/>
+				<xs:enumeration value="ST"/>
+				<xs:enumeration value="SU"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaOdstotkaPostavke">
+		<xs:annotation>
+			<xs:documentation>Koda vrste odstotka postavke (1-popust, 2-kazen, 7-odstotek od racuna, 12-popust, 15-odstotek penalov, 
+			16-odstotek obresti) (E:Loop-Group_40, E:Seg-PCD; E:Com-C501, E:El-5245)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="2"/>
+				<xs:enumeration value="7"/>
+				<xs:enumeration value="12"/>
+				<xs:enumeration value="15"/>
+				<xs:enumeration value="16"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaOdstotka">
+		<xs:annotation>
+			<xs:documentation>Koda vrste odstotka (7-odstotek racuna, 12-popust, 15-kazen, 16-zamudne obresti) 
+			(E:Loop-Group_40, E:Seg-PCD; E:Com-C501, E:El-5245)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="7"/>
+				<xs:enumeration value="12"/>
+				<xs:enumeration value="15"/>
+				<xs:enumeration value="16"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaLokacije">
+		<xs:annotation>
+			<xs:documentation>Identifikator lokacije (57-kraj plačila, 91-kraj izdaje dokumenta, 162-kraj prodaje) (E: El-LOC01)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="57"/>
+				<xs:enumeration value="91"/>
+				<xs:enumeration value="162"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaKomunikacije">
+		<xs:annotation>
+			<xs:documentation>Vrsta komunikacije (EM-eposta, FX-faks, TE-telefon, XF-X.400) (E:El-3155)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="EM"/>
+				<xs:enumeration value="FX"/>
+				<xs:enumeration value="TE"/>
+				<xs:enumeration value="XF"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaKolicine">
+		<xs:annotation>
+			<xs:documentation>Koda za vrsto kolicine (47-kolicina na racunu, 131-na dobavnici, 192-kolicina brezplacnega blaga) (E:El-6063)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="47"/>
+				<xs:enumeration value="131"/>
+				<xs:enumeration value="192"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaKodeArtiklaDodatna">
+		<xs:annotation>
+			<xs:documentation>Nacin stevilcenja artikla (HS-harm. sistem klasifikacije, IN-kupcevo stevilcenje, PV-dodatna identif. stevilka, 
+			SA-dobaviteljevo stev., SN-ser.stevilka, SRV-EAN koda) (E:Com-C212, E:El-7143)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="HS"/>
+				<xs:enumeration value="IN"/>
+				<xs:enumeration value="PV"/>
+				<xs:enumeration value="SA"/>
+				<xs:enumeration value="SN"/>
+				<xs:enumeration value="SRV"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaKodeArtikla">
+		<xs:annotation>
+			<xs:documentation>Nacin stevilcenja artikla (EN-EAN koda) (E:El-7143)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="SRV"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaDokumentaPostavke">
+		<xs:annotation>
+			<xs:documentation>Vrsta dokumenta postavke (AAB-predracun, AAJ-stevilka narocila dobave, AAK-dobavnica, AFO-referenca upravicenca, ALL-stevilka skupine sporocil, ALO-stevilka prevzemnice, 
+			AIZ-stevilka konsolidiranega (nadrejenega) racuna, APQ-povzetek komercialnega bancnega racuna, CD-dobropis, CR-referencna stevilka stranke, CT-pogodba, DL-bremepis, 
+			DQ-stevilka spremnega dopisa dobavnice, IP-stevilka uvoznega dovoljenja, IV-racun, ON-narocilo kupca, PL-stevilka cenika, POR-stevilka potrdila narocila, 
+			RF-stevilka izvozne reference, SZ-Stevilka specifikacije, VN-narocilo dobavitelja, VA-id za ddv ali davcna stevilka) (E:El- 1153)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="AAB"/>
+				<xs:enumeration value="AAJ"/>
+				<xs:enumeration value="AAK"/>
+				<xs:enumeration value="AFO"/>
+				<xs:enumeration value="ALL"/>
+				<xs:enumeration value="ALO"/>
+				<xs:enumeration value="AIZ"/>
+				<xs:enumeration value="APQ"/>
+				<xs:enumeration value="CD"/>
+				<xs:enumeration value="CR"/>
+				<xs:enumeration value="CT"/>
+				<xs:enumeration value="DL"/>
+				<xs:enumeration value="DQ"/>
+				<xs:enumeration value="IP"/>
+				<xs:enumeration value="IV"/>
+				<xs:enumeration value="ON"/>
+				<xs:enumeration value="PL"/>
+				<xs:enumeration value="POR"/>
+				<xs:enumeration value="RF"/>
+				<xs:enumeration value="SZ"/>
+				<xs:enumeration value="VN"/>
+				<xs:enumeration value="VA"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaDavkaPostavke">
+		<xs:annotation>
+			<xs:documentation>Koda vrste davka postavke (EXC-trosarina, VAT-DDV) (E:Com-C241; El-5153)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="EXC"/>
+				<xs:enumeration value="VAT"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaDavka">
+		<xs:annotation>
+			<xs:documentation>Koda vrste davka (VAT-davek na dodano vrednost)(E:Com-C241; El-5153)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="VAT"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaDatumaRoka">
+		<xs:annotation>
+			<xs:documentation>Vrsta datuma, na katerega se sklicuje rok placila (5-datum racuna, 29-datum izdaje) (E: El-2475)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="5"/>
+				<xs:enumeration value="29"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaDatumaPlacilnegaRoka">
+		<xs:annotation>
+			<xs:documentation>Vrsta datuma, ki doloca, da gre za referencni dokument (E:El-2005)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="13"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaDatuma">
+		<xs:annotation>
+			<xs:documentation>Identifikacija datuma racuna (11-dat. pošiljanja, 35-dat. odpošiljanja blaga oz. opravljanja storitev, 50-dat. prejema, 137-dat. dokumenta, 
+			263-obdobje računa, 325-obdobje davkov, 454-obračunski dat.) (E:Seg-DTM; E:Com-C507; E:El-2005)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="11"/>
+				<xs:enumeration value="35"/>
+				<xs:enumeration value="50"/>
+				<xs:enumeration value="137"/>
+				<xs:enumeration value="263"/>
+				<xs:enumeration value="325"/>
+				<xs:enumeration value="454"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaCene">
+		<xs:annotation>
+			<xs:documentation>Tip cene (AAA-neto izracun z vsemi odbitki/pribitki brez DDV, AAB-bruto cena brez DDV) (E: El-5125)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="AAA"/>
+				<xs:enumeration value="AAB"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaBesedila">
+		<xs:annotation>
+			<xs:documentation>Koda, ki doloca tip besedila (AAI-splošne informacije, PUR-popusti za predplacilo, TXD-informacije o davkih (oprostitve), ZZZ-s partnerjem dogovorjeni teskst) (E:El-4451)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="AAI"/>
+				<xs:enumeration value="PUR"/>
+				<xs:enumeration value="TXD"/>
+				<xs:enumeration value="ZZZ"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VrstaArtikla">
+		<xs:annotation>
+			<xs:documentation>Vrsta artikla (CU-prodajni artikel, RC-embalaza, SER-storitev) (E:El-7009)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="CU"/>
+				<xs:enumeration value="RC"/>
+				<xs:enumeration value="SER"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Valuta">
+		<xs:annotation>
+			<xs:documentation>Podatki o valuti za cel racun (E:Loop-Group_7; E:Seg-CUX; E:Com-C504)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaValuteRacuna"/>
+				<xs:element ref="KodaValute" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Ulica4">
+		<xs:annotation>
+			<xs:documentation>Naziv ulice - 4.del (E:El-3042)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Ulica3">
+		<xs:annotation>
+			<xs:documentation>Naziv ulice - 3.del (E:El-3042)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Ulica2">
+		<xs:annotation>
+			<xs:documentation>Naziv ulice - 2.del (E:El-3042)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Ulica1">
+		<xs:annotation>
+			<xs:documentation>Naziv ulice - 1.del (E:El-3042)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Ulica">
+		<xs:annotation>
+			<xs:documentation>Naziv ulice (E:Comp-C059)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Ulica1" minOccurs="0"/>
+				<xs:element ref="Ulica2" minOccurs="0"/>
+				<xs:element ref="Ulica3" minOccurs="0"/>
+				<xs:element ref="Ulica4" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TipOsebe">
+		<xs:annotation>
+			<xs:documentation>Tip kontaktne osebe (AD-racunovodstvo, AP-placilni sektor, AR-prejem faktur, GR-skladisce, PD-nabava, EB-oseba/vnasalec, ZZZ-vzajemni dogovor) (E:El-3139)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="AD"/>
+				<xs:enumeration value="AP"/>
+				<xs:enumeration value="AR"/>
+				<xs:enumeration value="GR"/>
+				<xs:enumeration value="PD"/>
+				<xs:enumeration value="EB"/>
+				<xs:enumeration value="ZZZ"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="TipInstitucije">
+		<xs:annotation>
+			<xs:documentation>Vrsta bancne institucije (PB-banka placnik, RB-banka prejemnik) (E:El-3035_1)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="PB"/>
+				<xs:enumeration value="RB"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Tekst5">
+		<xs:annotation>
+			<xs:documentation>Poljuben tekst 5.del (E:El-4440)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Tekst4">
+		<xs:annotation>
+			<xs:documentation>Poljuben tekst 4.del (E:El-4440)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Tekst3">
+		<xs:annotation>
+			<xs:documentation>Poljuben tekst 3.del (E:El-4440)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Tekst2">
+		<xs:annotation>
+			<xs:documentation>Poljuben tekst 2.del (E:El-4440)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Tekst1">
+		<xs:annotation>
+			<xs:documentation>Poljuben tekst 1.del (E:El-4440)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaVrstice" type="xs:integer">
+		<xs:annotation>
+			<xs:documentation>Zaporedna stevilka, ki oznacuje vrstico (E:El-1082)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StevilkaSklica">
+		<xs:annotation>
+			<xs:documentation>Stevilka dokumenta za sklic (E:El-1154)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaRacuna">
+		<xs:annotation>
+			<xs:documentation>Stevilka racuna (E-1004)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaPartnerja">
+		<xs:annotation>
+			<xs:documentation>Stevilka partnerja, dolocena od agencije (E:El-3039)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaKomunikacije">
+		<xs:annotation>
+			<xs:documentation>Stevilka faksa, telefona (E:El-3148)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="512"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaDokumentaPostavke">
+		<xs:annotation>
+			<xs:documentation>Stevilka, ki doloca dokument (E:Seg-RFF; E:Com-C506, E:El-1154)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaDokumenta">
+		<xs:annotation>
+			<xs:documentation>Stevilka, ki doloca dokument (E:Seg-RFF; E:Com-C506, E:El-1154)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaBancnegaRacuna">
+		<xs:annotation>
+			<xs:documentation>Stevilka bancnega racuna (E:El-3194)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaArtiklaDodatna">
+		<xs:annotation>
+			<xs:documentation>Stevilka artikla (E:Com-C212, E:El-7140)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StevilkaArtikla">
+		<xs:annotation>
+			<xs:documentation>Stevilka artikla (E:El-7140)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,35}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SkupniOdstotki">
+		<xs:annotation>
+			<xs:documentation>Podatki o odstotkih za cel racun (E:Seg-PCD; E:Com-C501)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaOdstotka"/>
+				<xs:element ref="Odstotek" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SklicZaPlacilo">
+		<xs:annotation>
+			<xs:documentation>Sklici za placilo (e:Loop-Group_49; E:Com-C506)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SklicPlacila"/>
+				<xs:element ref="StevilkaSklica" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SklicPlacila">
+		<xs:annotation>
+			<xs:documentation>Sklic za placilo (PQ-sklic na stevilko dokumenta) (E:El-1153)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="PQ"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Roki">
+		<xs:annotation>
+			<xs:documentation>Podatki o rokih na racunu (E:Com-C112)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaDatumaRoka" minOccurs="0"/>
+				<xs:element ref="VrstaRoka" minOccurs="0"/>
+				<xs:element ref="VrstaPeriode" minOccurs="0"/>
+				<xs:element ref="KolicinaPeriode" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReferencniPodatkiPodjetja">
+		<xs:annotation>
+			<xs:documentation>Referencni podatki podjetja (Davki, EANkode,...) (E:Loop-Group_3; E:Seg-RFF; E:C506)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaPodatkaPodjetja" minOccurs="0"/>
+				<xs:element ref="PodatekPodjetja" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReferencniDokumentiPostavke">
+		<xs:annotation>
+			<xs:documentation>Podatki o referencnih dokumentih na posamezno postavko (E:Loop-Group_29; E:Seg-RFF; E:Com-C506)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaDokumentaPostavke"/>
+				<xs:element ref="StevilkaDokumentaPostavke" minOccurs="0"/>
+				<xs:element ref="DatumDokumenta" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReferencniDokumenti">
+		<xs:annotation>
+			<xs:documentation>Podatki o referencnih dokumentih (E:Loop-Group_1)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StevilkaDokumenta" minOccurs="0"/>
+				<xs:element ref="DatumDokumenta" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="VrstaDokumenta">
+				<xs:annotation>
+					<xs:documentation>Vrsta dokumenta(AAB-predracun, AAJ-stevilka narocila dobave, AAK-dobavnica, AFO-referenca upravicenca, AIZ-stevilka konsolidiranega (nadrejenega) racuna, ALL-stevilka skupine sporocil, 
+					ALO-stevilka prevzemnice, APQ-povzetek komercialnega bancnega racuna, CD-dobropis, CR-referencna stevilka stranke, CT-pogodba, DL-bremepis,	DQ-stevilka spremnega dopisa dobavnice, 
+					IP-stevilka uvoznega dovoljenja, IV-racun, NAD-nadomestilo(za zavarovalnice), ON-narocilo kupca, PL-stevilka cenika, POR-stevilka potrdila narocila, RF-stevilka izvozne reference, SZ-Stevilka specifikacije, 
+					VN-narocilo dobavitelja, ZAH-zahtevek za placilo(za zavarovalnice)) (E:Seg-RFF; E:Com-C506, E:El-1153)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="AAB"/>
+						<xs:enumeration value="AAJ"/>
+						<xs:enumeration value="AAK"/>
+						<xs:enumeration value="AFO"/>
+						<xs:enumeration value="AIZ"/>
+						<xs:enumeration value="ALL"/>
+						<xs:enumeration value="ALO"/>
+						<xs:enumeration value="APQ"/>
+						<xs:enumeration value="CD"/>
+						<xs:enumeration value="CR"/>
+						<xs:enumeration value="CT"/>
+						<xs:enumeration value="DL"/>
+						<xs:enumeration value="DQ"/>
+						<xs:enumeration value="IP"/>
+						<xs:enumeration value="IV"/>
+						<xs:enumeration value="NAD"/>
+						<xs:enumeration value="ON"/>
+						<xs:enumeration value="PL"/>
+						<xs:enumeration value="POR"/>
+						<xs:enumeration value="RF"/>
+						<xs:enumeration value="SZ"/>
+						<xs:enumeration value="VN"/>
+						<xs:enumeration value="ZAH"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Racun">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="GlavaRacuna"/>
+				<xs:element ref="DatumiRacuna" maxOccurs="unbounded"/>
+				<xs:element ref="Lokacije" maxOccurs="unbounded"/>
+				<xs:element ref="PoljubnoBesedilo" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PoljubnoBesediloRazsirjeno" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ReferencniDokumenti" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PodatkiPodjetja" maxOccurs="unbounded"/>
+				<xs:element ref="Valuta" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PlacilniPogoji" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PostavkeRacuna" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PovzetekDavkovRacuna" maxOccurs="unbounded"/>
+				<xs:element ref="PovzetekZneskovRacuna" maxOccurs="unbounded"/>
+				<xs:element ref="GlobalniPopusti" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+			<xs:attribute name="Id" type="xs:string" use="optional" fixed="data"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PovzetekZneskovRacuna">
+		<xs:annotation>
+			<xs:documentation>Povzetek zneskov iz postavk (E:Loop-Group_48)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ZneskiRacuna"/>
+				<xs:element ref="SklicZaPlacilo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PovzetekDavkovRacuna">
+		<xs:annotation>
+			<xs:documentation>Povzetek vseh davkov iz postavk (E:Loop-Group_50)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DavkiRacuna"/>
+				<xs:element ref="ZneskiDavkov" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PostnaStevilka">
+		<xs:annotation>
+			<xs:documentation>Postna stevilka (E:El-3251)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="9"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PostavkeRacuna">
+		<xs:annotation>
+			<xs:documentation>Vsi podatki na postavki racuna (E:Loop-Group_25)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Postavka"/>
+				<xs:element ref="DodatnaIdentifikacijaArtikla" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="OpisiArtiklov" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="KolicinaArtikla" maxOccurs="unbounded"/>
+				<xs:element ref="ZneskiPostavke" maxOccurs="unbounded"/>
+				<xs:element ref="CenaPostavke" maxOccurs="unbounded"/>
+				<xs:element ref="ReferencniDokumentiPostavke" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="DavkiPostavke" maxOccurs="unbounded"/>
+				<xs:element ref="OdstotkiPostavk" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="StroskovnoMesto" minOccurs="0"/>
+				<xs:element ref="ObdobjeDobave" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Postavka">
+		<xs:annotation>
+			<xs:documentation>Postavka na racunu (E:Seg-LIN)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StevilkaVrstice" minOccurs="0"/>
+				<xs:element ref="IdentifikacijaArtikla" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PoljubnoBesedilo">
+		<xs:annotation>
+			<xs:documentation>Poljubno besedilo racuna (E:Segment-FTX)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaBesedila" minOccurs="0"/>
+				<xs:element ref="Besedilo" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PodatkiPodjetja">
+		<xs:annotation>
+			<xs:documentation>Podatki o podjetju (naslov, financni,..) (E:Loop-Group_2)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NazivNaslovPodjetja"/>
+				<xs:element ref="FinancniPodatkiPodjetja" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ReferencniPodatkiPodjetja" maxOccurs="unbounded"/>
+				<xs:element ref="KontaktiPodjetja" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PodatkiORokih">
+		<xs:annotation>
+			<xs:documentation>Placilni pogoji racuna (E:Seg-PAT)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaPogoja" minOccurs="0"/>
+				<xs:element ref="Roki" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PodatekPodjetja">
+		<xs:annotation>
+			<xs:documentation>Stevilka, ki doloca podatek npr. davcna st. (E:El-1154)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PlacilniRoki">
+		<xs:annotation>
+			<xs:documentation>Roki za odstotke (placilne pogoje)  (E:Seg-DTM; E:Com-C507)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaDatumaPlacilnegaRoka"/>
+				<xs:element ref="Datum" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PlacilniPogoji">
+		<xs:annotation>
+			<xs:documentation>Podatki o placilnih pogojih na racunu (E:Loop-Group_8)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PodatkiORokih"/>
+				<xs:element ref="PlacilniRoki" minOccurs="0"/>
+				<xs:element ref="SkupniOdstotki" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OpisiArtiklov">
+		<xs:annotation>
+			<xs:documentation>Opis posameznega artikla na postavki (E:Seg-IMD)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="KodaOpisaArtikla" minOccurs="0"/>
+				<xs:element ref="OpisArtikla" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OpisArtikla2">
+		<xs:annotation>
+			<xs:documentation>Opis artikla 2.del (E:El-7008)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="OpisArtikla1">
+		<xs:annotation>
+			<xs:documentation>Opis artikla 1.del (E:El-7008)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="OpisArtikla">
+		<xs:annotation>
+			<xs:documentation>Dodaten opis artikla (E:Comp-C273)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaArtikla" minOccurs="0"/>
+				<xs:element ref="OpisArtikla1" minOccurs="0"/>
+				<xs:element ref="OpisArtikla2" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OdstotkiPostavk">
+		<xs:annotation>
+			<xs:documentation>Odstotki postavk (E:Loop-Group_38)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Identifikator"/>
+				<xs:element ref="VrstaOdstotkaPostavke"/>
+				<xs:element ref="OdstotekPostavke" minOccurs="0"/>
+				<xs:element ref="VrstaZneskaOdstotka"/>
+				<xs:element ref="ZnesekOdstotka" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OdstotekPostavke">
+		<xs:annotation>
+			<xs:documentation>Odstotek (E:Loop-Group_40, E:Seg-PCD; E:Com-C501, E:El-5482)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,10}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="OdstotekDavkaPostavke">
+		<xs:annotation>
+			<xs:documentation>Odstotek davka na postavki (E: Com-C243; El-5278)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,17}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="OdstotekDavka">
+		<xs:annotation>
+			<xs:documentation>Odstotek davka na postavki (E: Com-C243; El-5278)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,17}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Odstotek">
+		<xs:annotation>
+			<xs:documentation>Odstotek (E:Loop-Group_40, E:Seg-PCD; E:Com-C501, E:El-5482)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,10}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NazivPartnerja4">
+		<xs:annotation>
+			<xs:documentation>NazivPartnerja 4.del (E:El-3036)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NazivPartnerja3">
+		<xs:annotation>
+			<xs:documentation>NazivPartnerja 3.del (E:El-3036)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NazivPartnerja2">
+		<xs:annotation>
+			<xs:documentation>NazivPartnerja 2.del (E:El-3036)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NazivPartnerja1">
+		<xs:annotation>
+			<xs:documentation>NazivPartnerja 1.del (E:El-3036)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NazivPartnerja">
+		<xs:annotation>
+			<xs:documentation>Naziv Partnerja (E:Comp-C080)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NazivPartnerja1" minOccurs="0"/>
+				<xs:element ref="NazivPartnerja2" minOccurs="0"/>
+				<xs:element ref="NazivPartnerja3" minOccurs="0"/>
+				<xs:element ref="NazivPartnerja4" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NazivNaslovPodjetja">
+		<xs:annotation>
+			<xs:documentation>Naziv in naslov (E: Seg-NAD)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaPartnerja" minOccurs="0"/>
+				<xs:element ref="IdentifikacijaPartnerja" minOccurs="0"/>
+				<xs:element ref="NazivPartnerja" minOccurs="0"/>
+				<xs:element ref="Ulica" minOccurs="0"/>
+				<xs:element ref="Kraj" minOccurs="0"/>
+				<xs:element ref="NazivDrzave" minOccurs="0"/>
+				<xs:element ref="PostnaStevilka" minOccurs="0"/>
+				<xs:element ref="KodaDrzave" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NazivLokacije">
+		<xs:annotation>
+			<xs:documentation>Naziv lokacije (E:COM517, El-C51704)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+				<xs:minLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NazivDrzave">
+		<xs:annotation>
+			<xs:documentation>Naziv drzave (E:El-3229)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NazivBanke2">
+		<xs:annotation>
+			<xs:documentation>Naziv banke, v kateri je odprt racun 2.del (E:El-3192)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="NazivBanke1">
+		<xs:annotation>
+			<xs:documentation>Naziv banke, v kateri je odprt racun 1.del (E:El-3192)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Lokacije">
+		<xs:annotation>
+			<xs:documentation>Lokacije dokumenta (E:Segment-LOC)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="VrstaLokacije"/>
+				<xs:element ref="NazivLokacije" minOccurs="0"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Kraj">
+		<xs:annotation>
+			<xs:documentation>Naziv kraja (E:El-3164)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="KontaktnaOseba">
+		<xs:annotation>
+			<xs:documentation>Podatki o kontaktnih osebah (E:Seg-CTA)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TipOsebe" minOccurs="0"/>
+				<xs:element ref="ImeOsebe" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="KontaktiPodjetja">
+		<xs:annotation>
+			<xs:documentation>Podatki o kontaknih osebah podjetja (E:Loop-Group_5)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="KontaktnaOseba" minOccurs="0"/>
+				<xs:element ref="Komunikacije" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Komunikacije">
+		<xs:annotation>
+			<xs:documentation>Podatki o telefonih, faksih (E:Seg-COM; E:Comp-C076)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StevilkaKomunikacije" minOccurs="0"/>
+				<xs:element ref="VrstaKomunikacije" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="KolicinaPeriode">
+		<xs:annotation>
+			<xs:documentation>Stevilo dni, mesecev za rok (E: El-2152)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,3}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="KolicinaArtikla">
+		<xs:annotation>
+			<xs:documentation>Kolicina na postavki (E:Seg-QTY; E:Com-C186)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaKolicine"/>
+				<xs:element ref="Kolicina"/>
+				<xs:element ref="EnotaMere"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Kolicina">
+		<xs:annotation>
+			<xs:documentation>Kolicina artikla (E:El-6060)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,15}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="KodaValute">
+		<xs:annotation>
+			<xs:documentation>ISO koda valute racuna (SIT, EUR,...) (E:El-6345)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="KodaOpisaArtikla">
+		<xs:annotation>
+			<xs:documentation>Vrsta opisa artikla (C-industrijski opis, F-prosto besedilo) (E:El-7077)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="C"/>
+				<xs:enumeration value="F"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="KodaDrzaveBanke">
+		<xs:annotation>
+			<xs:documentation>ISO koda drzave (E:El-3207)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="KodaDrzave">
+		<xs:annotation>
+			<xs:documentation>ISO koda drzave (E:El-3207)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IzdaniRacunEnostavni">
+		<xs:annotation>
+			<xs:documentation>Izdani racun-enostavna oblika</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Racun"/>
+				<xs:element ref="ds:Signature" minOccurs="0"/>
+				<xs:element name="Predstavitve" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Predstavitev" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType mixed="1">
+									<xs:sequence minOccurs="0" maxOccurs="unbounded">
+										<xs:any namespace="##any" processContents="lax"/>
+									</xs:sequence>
+									<xs:attribute name="Id" type="xs:ID" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ImeOsebe">
+		<xs:annotation>
+			<xs:documentation>Ime kontaktne osebe ali oddelka (E:El- 3412)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Identifikator">
+		<xs:annotation>
+			<xs:documentation>Popust, kazen ali provizija/nadomestilo (A-Popust, C-Kazen, P-Provizija/Nadomestilo) (E:Seg-ALC, E:El-5463)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="A"/>
+				<xs:enumeration value="C"/>
+				<xs:enumeration value="P"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IdentifikacijaPartnerja">
+		<xs:annotation>
+			<xs:documentation>Identifikacijski podatki partnerja/podjetja (E:Comp-C082)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StevilkaPartnerja" minOccurs="0"/>
+				<xs:element ref="Agencija" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IdentifikacijaArtikla">
+		<xs:annotation>
+			<xs:documentation>Podatki o artiklu-kode po EANu. Ce se jih ne porablja, potem se izpusti in uporabijo spodnji segmenti (E:Com-C212)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StevilkaArtikla" minOccurs="0"/>
+				<xs:element ref="VrstaKodeArtikla" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GlavaRacuna">
+		<xs:annotation>
+			<xs:documentation>Podatki o dokumentu (Seg-BGM)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="VrstaRacuna" minOccurs="0"/>
+				<xs:element ref="StevilkaRacuna"/>
+				<xs:element ref="FunkcijaRacuna" minOccurs="0"/>
+				<xs:element ref="NacinPlacila" minOccurs="0"/>
+				<xs:element ref="StroskovnoMesto" minOccurs="0"/>
+				<xs:element ref="KodaNamena" minOccurs="0"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FunkcijaRacuna">
+		<xs:annotation>
+			<xs:documentation>Funkcija dokumenta (1-preklic, 5-zamenjava, 7-duplikat, 9-original, 31-kopija, 43-ponovni prenos sporocila) (E-1225)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="5"/>
+				<xs:enumeration value="7"/>
+				<xs:enumeration value="9"/>
+				<xs:enumeration value="31"/>
+				<xs:enumeration value="43"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="FinancniPodatkiPodjetja">
+		<xs:annotation>
+			<xs:documentation>Podatki o financnih institucijah (E:Seg-FII)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TipInstitucije" minOccurs="0"/>
+				<xs:element ref="BancniRacun" minOccurs="0"/>
+				<xs:element ref="KodaDrzaveBanke" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EnotaMere">
+		<xs:annotation>
+			<xs:documentation>Enota mere (PCE-kos, HUR-ura, DAY-dan....) (E:El-6411)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="ACR"/>
+				<xs:enumeration value="AMT"/>
+				<xs:enumeration value="APX"/>
+				<xs:enumeration value="ASM"/>
+				<xs:enumeration value="ASU"/>
+				<xs:enumeration value="BTU"/>
+				<xs:enumeration value="C0"/>
+				<xs:enumeration value="CEL"/>
+				<xs:enumeration value="CMK"/>
+				<xs:enumeration value="CMT"/>
+				<xs:enumeration value="DAY"/>
+				<xs:enumeration value="DMT"/>
+				<xs:enumeration value="EA"/>
+				<xs:enumeration value="FAH"/>
+				<xs:enumeration value="FOT"/>
+				<xs:enumeration value="GV"/>
+				<xs:enumeration value="GLI"/>
+				<xs:enumeration value="GRM"/>
+				<xs:enumeration value="GWH"/>
+				<xs:enumeration value="HLT"/>
+				<xs:enumeration value="HUR"/>
+				<xs:enumeration value="INH"/>
+				<xs:enumeration value="JOU"/>
+				<xs:enumeration value="KBA"/>
+				<xs:enumeration value="KEL"/>
+				<xs:enumeration value="KGM"/>
+				<xs:enumeration value="KHZ"/>
+				<xs:enumeration value="KJO"/>
+				<xs:enumeration value="KTM"/>
+				<xs:enumeration value="KVT"/>
+				<xs:enumeration value="KWH"/>
+				<xs:enumeration value="KWT"/>
+				<xs:enumeration value="LNE"/>
+				<xs:enumeration value="LTR"/>
+				<xs:enumeration value="MAL"/>
+				<xs:enumeration value="MAW"/>
+				<xs:enumeration value="MGM"/>
+				<xs:enumeration value="MHZ"/>
+				<xs:enumeration value="MIN"/>
+				<xs:enumeration value="MLT"/>
+				<xs:enumeration value="MMT"/>
+				<xs:enumeration value="MON"/>
+				<xs:enumeration value="MTK"/>
+				<xs:enumeration value="MTQ"/>
+				<xs:enumeration value="MTR"/>
+				<xs:enumeration value="MWH"/>
+				<xs:enumeration value="NAR"/>
+				<xs:enumeration value="NRL"/>
+				<xs:enumeration value="ONZ"/>
+				<xs:enumeration value="OZA"/>
+				<xs:enumeration value="OZI"/>
+				<xs:enumeration value="P1"/>
+				<xs:enumeration value="PCE"/>
+				<xs:enumeration value="PND"/>
+				<xs:enumeration value="PTI"/>
+				<xs:enumeration value="PTN"/>
+				<xs:enumeration value="QAN"/>
+				<xs:enumeration value="QTI"/>
+				<xs:enumeration value="RTO"/>
+				<xs:enumeration value="SEC"/>
+				<xs:enumeration value="ST"/>
+				<xs:enumeration value="TNE"/>
+				<xs:enumeration value="VLT"/>
+				<xs:enumeration value="WHR"/>
+				<xs:enumeration value="WRD"/>
+				<xs:enumeration value="WTT"/>
+				<xs:enumeration value="YRD"/>
+				<xs:enumeration value="ZP"/>
+				<xs:enumeration value="59"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DodatnaIdentifikacijaArtikla">
+		<xs:annotation>
+			<xs:documentation>Dodatna identifikacija artikla (npr. dobaviteljeva) (E:Seg-PIA)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaPodatkaArtikla"/>
+				<xs:element ref="StevilkaArtiklaDodatna" minOccurs="0"/>
+				<xs:element ref="VrstaKodeArtiklaDodatna" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DavkiRacuna">
+		<xs:annotation>
+			<xs:documentation>Povzetki davkov na celotnem racunu (E:Seg-TAX)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaDavka" minOccurs="0"/>
+				<xs:element ref="OdstotekDavka" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DavkiPostavke">
+		<xs:annotation>
+			<xs:documentation>Podatki o davkih na postavki (E:Loop-Group_33)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DavkiNaPostavki" minOccurs="0"/>
+				<xs:element ref="ZneskiDavkovPostavke" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DavkiNaPostavki">
+		<xs:annotation>
+			<xs:documentation>Povzetki davkov na postavki racuna (E:Seg-TAX)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaDavkaPostavke" minOccurs="0"/>
+				<xs:element ref="OdstotekDavkaPostavke" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatumiRacuna">
+		<xs:annotation>
+			<xs:documentation>Podatki o datumih dokumenta (Seg-DTM)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="VrstaDatuma" minOccurs="0"/>
+				<xs:element ref="DatumRacuna" minOccurs="0"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatumRacuna" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Datum racuna (E:Seg-DTM; E:Com-C507; E:El-2380)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DatumDokumenta" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Datum referencnega dokumenta (E:Seg-RFF; E:Com-C507; E:El-2380)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Datum" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Dan placilnega roka (E:Seg-DTM; E:Com-C507; E:El-2380)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CenaPostavke">
+		<xs:annotation>
+			<xs:documentation>Podatki o cenah na postavki (E:E:Loop-Group_28; Seg-PRI; Com-C509)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaCene" minOccurs="0"/>
+				<xs:element ref="Cena" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Cena">
+		<xs:annotation>
+			<xs:documentation>Cena postavke (E: El-5118)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,15}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Besedilo">
+		<xs:annotation>
+			<xs:documentation>Poljubno besedilo (E:Composite-C108)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Tekst1" minOccurs="0"/>
+				<xs:element ref="Tekst2" minOccurs="0"/>
+				<xs:element ref="Tekst3" minOccurs="0"/>
+				<xs:element ref="Tekst4" minOccurs="0"/>
+				<xs:element ref="Tekst5" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BancniRacun">
+		<xs:annotation>
+			<xs:documentation>Podatki o bancnem racunu (E:Comp-C078)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StevilkaBancnegaRacuna" minOccurs="0"/>
+				<xs:element ref="NazivBanke1" minOccurs="0"/>
+				<xs:element ref="NazivBanke2" minOccurs="0"/>
+				<xs:element ref="BIC" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Agencija">
+		<xs:annotation>
+			<xs:documentation>Koda agencije, ki stevilci partnerje (9-GS1/prej EAN, 91-stevilka agencije, ki je dodelila identifikacijo, npr DURS) (E:El-3055)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="9"/>
+				<xs:enumeration value="91"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="NacinPlacila">
+		<xs:annotation>
+			<xs:documentation>Nacin placila (0-racun je potrebno placati, 1-racun bo placan preko direktne obremenitve in ga ni potrebno placati, 2-racun je bil ze placan, 3-drugo/ni moznosti placila)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="2"/>
+				<xs:enumeration value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="StroskovnoMesto">
+		<xs:annotation>
+			<xs:documentation>Stroskovno mesto</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="280"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="KodaNamena">
+		<xs:annotation>
+			<xs:documentation>Koda namena SEPA UPN placilnega naloga</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="BIC">
+		<xs:annotation>
+			<xs:documentation>BIC koda</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="11"/>
+				<xs:pattern value="[A-Z]{6,6}[A-Z2-9][A-NP-Z|0-9]([A-Z0-9]{3,3}){1,1}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="ObdobjeDobave">
+		<xs:annotation>
+			<xs:documentation>Datum ali obdobje dobave posamezne postavke</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="35"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="GlobalniPopusti">
+		<xs:annotation>
+			<xs:documentation>Globalni popusti</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OpisPopusta" minOccurs="0"/>
+				<xs:element ref="TipPopusta" minOccurs="0"/>
+				<xs:element ref="OdstotekPopusta" minOccurs="0"/>
+				<xs:element ref="ZnesekPopusta" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="OpisPopusta">
+		<xs:annotation>
+			<xs:documentation>Opis popusta</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="TipPopusta">
+		<xs:annotation>
+			<xs:documentation>Tip popusta (PP-popust na popust, VP-vzporedni popust)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="PP"/>
+				<xs:enumeration value="VP"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="OdstotekPopusta">
+		<xs:annotation>
+			<xs:documentation>Odstotek popusta</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,10}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="ZnesekPopusta">
+		<xs:annotation>
+			<xs:documentation>Znesek popusta</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:float">
+				<xs:pattern value="([0-9]|\+|\-|E|e|\.){0,18}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="PoljubnoBesediloRazsirjeno">
+		<xs:annotation>
+			<xs:documentation>Razsirjeno poljubno besedilo racuna (E:Segment-FTX)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="VrstaBesedila"/>
+				<xs:element ref="ImeBesedila"/>
+				<xs:element ref="VrednostBesedila"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="ImeBesedila">
+		<xs:annotation>
+			<xs:documentation>Ime rasirjenega poljubnega besedila</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="VrednostBesedila">
+		<xs:annotation>
+			<xs:documentation>Vrednost razsirjenega poljubnega besedila </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="Tabela" maxOccurs="unbounded"/>
+				<xs:element ref="Tekst" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="Tabela">
+		<xs:annotation>
+			<xs:documentation>Tabela razsirjenega poljubnega besedila</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Name" type="xs:string"/>
+				<xs:element name="Row" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Field" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="Name" type="xs:string" use="required"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="Number" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- e-SLOG 1.6 -->
+	<xs:element name="Tekst">
+		<xs:annotation>
+			<xs:documentation>Poljuben tekst (E:El-4440)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="70"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>

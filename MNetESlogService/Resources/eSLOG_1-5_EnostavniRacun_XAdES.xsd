@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by GS1 Slovenija (GS1 Slovenija) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Crea (Crea) -->
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://uri.etsi.org/01903/v1.1.1#" targetNamespace="http://uri.etsi.org/01903/v1.1.1#" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.gzs.si/e-poslovanje/sheme/eSlog_1-5_EnostavniRacun_signature.xsd"/>
+	<xs:element name="QualifyingProperties">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SignedProperties">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SignedSignatureProperties">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="SigningTime" type="xs:dateTime"/>
+										<xs:element name="SigningCertificate">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Cert">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="CertDigest">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="DigestMethod" type="ds:DigestMethodType"/>
+																			<xs:element name="DigestValue" type="ds:DigestValueType"/>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="IssuerSerial" type="ds:X509IssuerSerialType"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="SignaturePolicyIdentifier">
+											<xs:complexType>
+												<xs:choice>
+													<xs:element name="SignaturePolicyId">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="SigPolicyId" type="ObjectIdentifierType"/>
+																<xs:element name="SigPolicyHash">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="DigestMethod" type="ds:DigestMethodType"/>
+																			<xs:element name="DigestValue" type="xs:base64Binary"/>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="SigPolicyQualifiers" minOccurs="0">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="SigPolicyQualifier" maxOccurs="unbounded">
+																				<xs:complexType>
+																					<xs:choice>
+																						<xs:element name="SPURI" type="xs:anyURI" minOccurs="0"/>
+																						<xs:element name="SPUserNotice" type="SPUserNoticeType" minOccurs="0"/>
+																					</xs:choice>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="SignaturePolicyImplied">
+														<xs:complexType/>
+													</xs:element>
+												</xs:choice>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="SignerRole" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ClaimedRoles" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ClaimedRole" maxOccurs="unbounded">
+																	<xs:complexType mixed="true">
+																		<xs:sequence>
+																			<xs:any namespace="##any"/>
+																		</xs:sequence>
+																		<xs:anyAttribute namespace="##any"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="CertifiedRoles" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="CertifiedRole" type="xs:base64Binary" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="SignedDataObjectProperties" type="SignedDataObjectPropertiesType" minOccurs="0"/>
+						</xs:sequence>
+						<xs:attribute name="Id" type="xs:ID" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="Target" type="xs:anyURI" use="required"/>
+			<xs:attribute name="Id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Start SignedDataObjectProperties-->
+	<xs:complexType name="SignedDataObjectPropertiesType">
+		<xs:sequence>
+			<xs:element name="DataObjectFormat" type="DataObjectFormatType" minOccurs="0" maxOccurs="unbounded"/>
+			<!--	<xs:element name="CommitmentTypeIndication" type="CommitmentTypeIndicationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AllDataObjectsTimeStamp" type="TimeStampType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IndividualDataObjectsTimeStamp" type="TimeStampType" minOccurs="0" maxOccurs="unbounded"/>
+		-->
+		</xs:sequence>
+	</xs:complexType>
+	<!-- End SignedDataObjectProperties-->
+	<!-- Start DataObjectFormat -->
+	<xs:complexType name="DataObjectFormatType">
+		<xs:sequence>
+			<xs:element name="Description" type="xs:string" minOccurs="0"/>
+			<xs:element name="ObjectIdentifier" type="ObjectIdentifierType" minOccurs="0"/>
+			<xs:element name="MimeType" type="xs:string" minOccurs="0"/>
+			<xs:element name="Encoding" type="xs:anyURI" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="ObjectReference" type="xs:anyURI" use="required"/>
+	</xs:complexType>
+	<!-- End DataObjectFormat -->
+	<!-- Start ObjectIdentifierType-->
+	<xs:complexType name="ObjectIdentifierType">
+		<xs:sequence>
+			<xs:element name="Identifier" type="IdentifierType"/>
+			<xs:element name="Description" type="xs:string" minOccurs="0"/>
+			<xs:element name="DocumentationReferences" type="DocumentationReferencesType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IdentifierType">
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI">
+				<xs:attribute name="Qualifier" type="QualifierType" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="QualifierType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OIDAsURI"/>
+			<xs:enumeration value="OIDAsURN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DocumentationReferencesType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="DocumentationReference" type="xs:anyURI"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- End ObjectIdentifierType-->
+	<xs:complexType name="SPUserNoticeType">
+		<xs:sequence>
+			<xs:element name="ExplicitText" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

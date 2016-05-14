@@ -1,0 +1,96 @@
+﻿<Window x:Class="MNet.ESlog.Gui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MNet.ESlog.Gui"
+        mc:Ignorable="d"
+        Title="Slovenski e-račun e-Slog / SLO e-invoices e-Slog" SizeToContent="WidthAndHeight">
+
+  <Border BorderBrush="{x:Null}" Padding="10,10,10,0" Background="#FFC8DBEC">
+    <StackPanel>
+      <!-- <Border BorderThickness="1" BorderBrush="Black" Margin="10" Padding="10"> -->
+      <StackPanel>
+        <TextBlock HorizontalAlignment="Center" FontSize="18"><Bold>Podpiši e-SLOG dokument / Sign e-SLOG document</Bold></TextBlock>
+        <StackPanel Margin="10">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="50" />
+              <RowDefinition Height="50" />
+              <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="180" />
+              <ColumnDefinition Width="400" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0,0,0,2" Grid.Row="0" Grid.ColumnSpan="3" BorderBrush="Black" />
+            <Border BorderThickness="0,0,0,2" Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="Black" />
+            <Border BorderThickness="0,0,0,2" Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="Black" />
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" TextWrapping="Wrap" VerticalAlignment="Center">
+                Vhodni <Italic>(nepodpisan)</Italic> dokument / Input <Italic>(unsigned)</Italic> document :
+            </TextBlock>
+            <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+              <TextBox x:Name="tbInput" MaxHeight="20" TextChanged="tbTextChanged"/>
+              <TextBlock x:Name="tbInput_alert" HorizontalAlignment="center" Foreground="#FFFA0000" FontWeight="Bold">
+                  Obstoječa datoteka / Existing file
+              </TextBlock>
+            </StackPanel>
+            <Button x:Name="btnInput" Grid.Row="0" Grid.Column="2" Content=" Izberi / select " Width="100" MaxHeight="25" Margin="10,0,10,0" Click="btnSelectClick"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,10,0,10" TextWrapping="Wrap" VerticalAlignment="Center">
+                Izhodni <Italic>(podpisan)</Italic> dokument / Output <Italic>(signed)</Italic> document :
+            </TextBlock>
+            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+              <TextBox x:Name="tbOutput" MaxHeight="20" TextChanged="tbTextChanged"/>
+              <TextBlock x:Name="tbOutput_alert" HorizontalAlignment="center" Foreground="#FFFA0000" FontWeight="Bold">
+                  Obstoječa datoteka / Existing file
+              </TextBlock>
+            </StackPanel>
+            <Button x:Name="btnOutput" Grid.Row="1" Grid.Column="2" Content=" Izberi / select " Width="100" MaxHeight="25" Margin="10,0,10,0" Click="btnSelectClick"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,10,0,10" TextWrapping="Wrap" VerticalAlignment="Center">
+                Digitalni ključ / Certificate
+            </TextBlock>
+            <TextBox x:Name="tbCertificate"  Grid.Row="2" Grid.Column="1" MaxHeight="20" IsReadOnly="True"/>
+            <Button x:Name="btnCertificate" Grid.Row="2" Grid.Column="2" Content=" Izberi / select " Width="100" MaxHeight="25" Margin="10,0,10,0" Click="btnSelectClick"/>
+          </Grid>
+        </StackPanel>
+
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Button x:Name="btnSign" Grid.Row="0" Grid.Column="0" Content=" Podpiši / Sign " MinHeight="30" Width="200" Click="btnSignClick" Margin="0,10,0,10"/>
+          <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock Margin="0,0,5,0"><Bold>Preverite podpisan dokument na / Check signed document on:</Bold></TextBlock>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Margin="0,0,5,0"><Italic><Hyperlink NavigateUri="http://proxsign.setcce.si/proXsign/?" RequestNavigate="Hyperlink_RequestNavigate">http://proxsign.setcce.si/proXsign/?</Hyperlink></Italic></TextBlock>
+              <TextBlock Margin="0,0,5,0"><Bold>,</Bold></TextBlock>
+              <TextBlock Margin="0,0,5,0"><Italic><Hyperlink NavigateUri=" http://www.eracuni.si/vizualizacija" RequestNavigate="Hyperlink_RequestNavigate"> http://www.eracuni.si/vizualizacija</Hyperlink></Italic></TextBlock>
+            </StackPanel>
+          </StackPanel>
+        </Grid>
+        <Button x:Name="btnClose" Content=" Zapri / Close " MinHeight="30" Width="200" Click="btnCloseClick" Margin="0,30,20,0" HorizontalAlignment="Right"/>
+      </StackPanel>
+      <!-- </Border> -->
+
+      <DockPanel LastChildFill="False">
+        <Border DockPanel.Dock="Right" BorderThickness="0,1,0,0" BorderBrush="Black" Margin="0,30,0,20">
+          <StackPanel Orientation="Horizontal" Opacity="1">
+            <TextBlock Margin="0,0,10,0"><Bold>Matjaž Prtenjak</Bold></TextBlock>
+            <TextBlock Margin="0,0,10,0">e-mail: <Italic><Hyperlink NavigateUri="mailto:matjaz@matjazev.net" RequestNavigate="Hyperlink_RequestNavigate">matjaz@matjazev.net</Hyperlink></Italic></TextBlock>
+            <TextBlock Margin="0,0,10,0">web: <Italic><Hyperlink NavigateUri="http://www.matjazev.net" RequestNavigate="Hyperlink_RequestNavigate">http://www.matjazev.net</Hyperlink></Italic></TextBlock>
+            <TextBlock Margin="0,0,10,0">forum: <Italic><Hyperlink NavigateUri="http://www.matjazev.net/forum" RequestNavigate="Hyperlink_RequestNavigate">http://www.matjazev.net/forum</Hyperlink></Italic></TextBlock>
+          </StackPanel>
+        </Border>
+      </DockPanel>
+    </StackPanel>
+  </Border>
+</Window>
