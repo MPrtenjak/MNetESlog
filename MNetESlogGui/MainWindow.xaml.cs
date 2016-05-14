@@ -164,7 +164,7 @@ namespace MNet.ESlog.Gui
 
     private void btnCloseClick(object sender, RoutedEventArgs e)
     {
-      Close();
+      this.Close();
     }
 
     private void tbTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
