@@ -7,7 +7,7 @@
 using System.Reflection;
 
 [assembly: AssemblyCompany("Matjazev.NET")]
-[assembly: AssemblyCopyright("Copyright © Matjazev.NET. All rights reserved")]
+[assembly: AssemblyCopyright("Copyright Â© Matjazev.NET. All rights reserved")]
 [assembly: AssemblyTrademark("MNet")]
 [assembly: AssemblyCulture("")]
 
@@ -22,8 +22,4 @@ using System.Reflection;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.2018.180.7857")]
-<<<<<<< HEAD
-[assembly: AssemblyFileVersion("1.2018.180.7857")]
-=======
-[assembly: AssemblyFileVersion("1.2018.180.7857")]
->>>>>>> New version
+[assembly: AssemblyFileVersion("1.2018.180.7857"
