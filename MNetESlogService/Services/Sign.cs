@@ -122,8 +122,11 @@ namespace MNet.ESlog.Service.Services
 
     private KeyInfo getKeyInfo()
     {
-      KeyInfo keyInfo = new KeyInfo();
       KeyInfoX509Data keyInfoX509Data = new KeyInfoX509Data(this.certificate, X509IncludeOption.ExcludeRoot);
+      if (keyInfoX509Data.Certificates.Count != 1)
+        keyInfoX509Data = new KeyInfoX509Data(this.certificate, X509IncludeOption.EndCertOnly);
+
+      KeyInfo keyInfo = new KeyInfo();
       keyInfo.AddClause(keyInfoX509Data);
       return keyInfo;
     }
