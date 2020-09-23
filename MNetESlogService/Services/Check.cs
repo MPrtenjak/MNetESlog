@@ -35,9 +35,21 @@ namespace MNet.ESlog.Service.Services
       if (this.tryExecute(xmlFileName))
         return true;
 
-      // try with local schema
-      if (this.loadschema != null)
-        return this.tryExecute(xmlFileName);
+      // try with local schemas
+      // eSlog2.0
+      this.schemaID = 20;
+      if (this.tryExecute(xmlFileName))
+        return true;
+
+      // eSlog1.6
+      this.schemaID = 6;
+      if (this.tryExecute(xmlFileName))
+        return true;
+
+      // eSlog1.5
+      this.schemaID = 5;
+      if (this.tryExecute(xmlFileName))
+        return true;
 
       return false;
     }
@@ -51,13 +63,19 @@ namespace MNet.ESlog.Service.Services
       {
         using (XmlReader reader = XmlReader.Create(xmlFileName, this.settings))
         {
-          this.continueProcess = true;
-          while (reader.Read() && this.continueProcess)
+          readerInSignatureElement = false;
+          while (reader.Read())
           {
-            if (reader.IsStartElement())
+            if (reader.LocalName == "Signature")
             {
-              if (reader.LocalName == "Signature")
+              if (reader.IsStartElement())
+              {
                 this.IsSigned = true;
+                readerInSignatureElement = true;
+              }
+
+              if (reader.NodeType == XmlNodeType.EndElement)
+                readerInSignatureElement = false;
             }
           }
         }
@@ -85,8 +103,10 @@ namespace MNet.ESlog.Service.Services
       this.Errors = new List<string>();
       this.IsSigned = false;
 
-      this.settings = new XmlReaderSettings();
-      this.settings.ValidationType = ValidationType.Schema;
+      this.settings = new XmlReaderSettings
+      {
+        ValidationType = ValidationType.Schema
+      };
       this.settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
       this.settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
       this.settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
@@ -108,15 +128,20 @@ namespace MNet.ESlog.Service.Services
 
     private void addLocalSchema()
     {
-      if (this.loadschema == null)
+      if (this.schemaID == null)
         return;
 
       XmlSchemaSet schemas = new XmlSchemaSet();
 
-      if (this.loadschema.Version == 5)
-        schemas.Add(this.loadschema.Namespace, new XmlTextReader(Resources.Get("eSLOG_1-5_EnostavniRacun.xsd")));
+      if (this.schemaID == 20)
+      {
+        schemas.Add("urn:eslog:2.00", new XmlTextReader(Resources.Get("eSLOG20_INVOIC_v200.xsd")));
+        schemas.Add("http://www.w3.org/2000/09/xmldsig#", new XmlTextReader(Resources.Get("xmldsig-core-schema.xsd")));
+      }
+      else if (this.schemaID == 6)
+        schemas.Add("", new XmlTextReader(Resources.Get("eSLOG_1-6_EnostavniRacun.xsd")));
       else
-        schemas.Add(this.loadschema.Namespace, new XmlTextReader(Resources.Get("eSLOG_1-6_EnostavniRacun.xsd")));
+        schemas.Add("", new XmlTextReader(Resources.Get("eSLOG_1-5_EnostavniRacun.xsd")));
 
       this.settings.Schemas = schemas;
     }
@@ -125,25 +150,17 @@ namespace MNet.ESlog.Service.Services
     {
       if (args.Severity == XmlSeverityType.Warning)
       {
-        // if eslog schema not found, try local schema
-        if (args.Message.Contains("eSLOG"))
-        {
-          if (this.loadschema != null) return;
-
-          int version = args.Message.Contains("eSLOG_1-5") ? 5 : 6;
-          this.loadschema = new LoadLocalSchema(string.Empty, version);
-          this.continueProcess = false;
-          return;
-        }
-
-        this.Warnings.Add(args.Message);
+        // ignoring warnings stating that schemas can't be found
+        // and ignoring all warnings in Signature element
+        if ((!args.Message.StartsWith("Cannot load the schema")) && (!readerInSignatureElement))
+          this.Warnings.Add(args.Message);
       }
       else
         this.Errors.Add(args.Message);
     }
 
-    private bool continueProcess = true;
+    private bool readerInSignatureElement;
     private XmlReaderSettings settings = new XmlReaderSettings();
-    private LoadLocalSchema loadschema = null;
+    private int? schemaID = null;
   }
 }

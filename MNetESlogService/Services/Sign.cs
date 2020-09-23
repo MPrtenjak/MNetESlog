@@ -18,8 +18,10 @@ namespace MNet.ESlog.Service.Services
   {
     public XmlDocument Execute(string xmlFileName, X509Certificate2 certificate, DateTime timeStamp)
     {
-      this.xmlDocument = new XmlDocument();
-      this.xmlDocument.PreserveWhitespace = true;
+      this.xmlDocument = new XmlDocument
+      {
+        PreserveWhitespace = true
+      };
       this.xmlDocument.Load(xmlFileName);
 
       this.certificate = certificate;
@@ -68,7 +70,11 @@ namespace MNet.ESlog.Service.Services
     {
       var racun = this.xmlDocument.DocumentElement.SelectSingleNode("//*[local-name()='Racun']");
       if (racun == null)
-        throw new Exception("Dokument je neustrezen / Document is not valid");
+      {
+        racun = this.xmlDocument.DocumentElement.SelectSingleNode("//*[local-name()='M_INVOIC']");
+        if (racun == null)
+          throw new Exception("Dokument je neustrezen / Document is not valid");
+      }
 
       var Id = racun.Attributes["Id"];
       if (Id != null)
@@ -114,10 +120,11 @@ namespace MNet.ESlog.Service.Services
 
     private Reference addReference(string type, string uri)
     {
-      Reference reference1 = new Reference();
-      reference1.Type = type;
-      reference1.Uri = uri;
-      return reference1;
+      return new Reference
+      {
+        Type = type,
+        Uri = uri
+      };
     }
 
     private KeyInfo getKeyInfo()
@@ -129,11 +136,6 @@ namespace MNet.ESlog.Service.Services
       KeyInfo keyInfo = new KeyInfo();
       keyInfo.AddClause(keyInfoX509Data);
       return keyInfo;
-    }
-
-    private XmlElement createElement(string prefix, string localName, string uri)
-    {
-      return this.xmlDocument.CreateElement(prefix, localName, uri);
     }
 
     private DataObject createQualifyingProperties()
