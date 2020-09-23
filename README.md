@@ -4,7 +4,7 @@
 
 ### Purpose
 
-This is .NET library for signing Slovenian e-documents using e-SLOG version 1.5 or 1.6.
+This is .NET library for signing Slovenian e-documents using e-SLOG version 1.5, 1.6 or 2.0.
 
 With its help you can:
 
@@ -19,7 +19,7 @@ You only need .NET 3.5 or later, because the library does not have any other ext
 
 #### Signing the document
 
-To sign the document, you need an unsigned document that is compliant with the e-SLOG 1.5 or e-SLOG 1.6 and the certificate with which you want to sign the document. Usage is extremely simple:
+To sign the document, you need an unsigned document that is compliant with the e-SLOG 1.5, e-SLOG 1.6 or e-SLOG 2.0 and the certificate with which you want to sign the document. Usage is extremely simple:
 
 If you need signed XmlDocument object:
 
@@ -117,7 +117,7 @@ I got the idea for a solution through questions on codeproject: http://www.codep
 
 ### Namen
 
-To je .NET knjižnica, ki je namenjena podpisovanju slovenskih e-dokumentov, ki uporabljajo e-SLOG verzije 1.5 ali 1.6.
+To je .NET knjižnica, ki je namenjena podpisovanju slovenskih e-dokumentov, ki uporabljajo e-SLOG verzije 1.5, 1.6 ali 2.0.
 
 Z njeno pomočjo lahko
 
@@ -132,7 +132,7 @@ Za uporabo potrebujete samo .NET 3.5 ali novejši, saj knjižnica nima preostali
 
 #### Podpis dokumenta
 
-Za podpis dokumenta potrebujete nepodpisan dokument, ki je skladen s shemo e-SLOG 1.5 ali e-SLOG 1.6, ter certifikat s katerim želite dokument podpisati. Uporaba je skrajno preprosta.
+Za podpis dokumenta potrebujete nepodpisan dokument, ki je skladen s shemo e-SLOG 1.5, e-SLOG 1.6 ali e-SLOG 2.0, ter certifikat s katerim želite dokument podpisati. Uporaba je skrajno preprosta.
 
 V kolikor potrebujete podpisan objekt XmlDocument izvedete sledečo kodo
 

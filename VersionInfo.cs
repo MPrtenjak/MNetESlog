@@ -1,4 +1,4 @@
-// <copyright file="VersionInfo.cs" company="MNet">
+﻿// <copyright file="VersionInfo.cs" company="MNet">
 //     Copyright (c) Matjaz Prtenjak All rights reserved.
 // </copyright>
 // <author>Matjaz Prtenjak</author>
@@ -6,20 +6,20 @@
 
 using System.Reflection;
 
-[assembly: AssemblyCompany("Matjazev.NET")]
-[assembly: AssemblyCopyright("Copyright Â© Matjazev.NET. All rights reserved")]
+[assembly: AssemblyCompany("MNet.si")]
+[assembly: AssemblyCopyright("Copyright © MNet.si. All rights reserved")]
 [assembly: AssemblyTrademark("MNet")]
 [assembly: AssemblyCulture("")]
 
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
-//      Minor Version 
+//      Minor Version
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
+// You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2018.180.7857")]
-[assembly: AssemblyFileVersion("1.2018.180.7857"
+[assembly: AssemblyVersion("1.20.267.9557")]
+[assembly: AssemblyFileVersion("1.20.267.9557")]
