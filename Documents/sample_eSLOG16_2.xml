@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="\\zzi.si\Files\Projekti\ZZI_podpora\old\B2B\B2B\EDI\GZS\Predlogi za dopolnitve\2015\Primer\Vizualizacija_e-SLOG_1.6_prirocnik_verzija_2012_1_4.xslt"?>
+<IzdaniRacunEnostavni xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xds="http://uri.etsi.org/01903/v1.1.1#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.gzs.si/e-poslovanje/sheme/eSLOG_1-6_EnostavniRacun.xsd">
+	<Racun Id="data">
+		<!-- verzija priročnika -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>PRIROCNIK_ESLOG_1_6</Tekst1>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- številka računa -->
+		<GlavaRacuna>
+			<VrstaRacuna>380</VrstaRacuna>
+			<StevilkaRacuna>RAC-12345-6789-XX</StevilkaRacuna>
+			<FunkcijaRacuna>9</FunkcijaRacuna>
+			<!-- 1 - Racuna ni potrebno placati. -->
+			<NacinPlacila>1</NacinPlacila>
+			<!-- Stroskovno mesto računa -->
+			<StroskovnoMesto>123456</StroskovnoMesto>
+			<!-- OTHR - drugo -->			
+			<KodaNamena>OTHR</KodaNamena>
+		</GlavaRacuna>
+		<!-- naslov računa -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>NASLOV_RACUNA</Tekst1>
+				<Tekst2>Račun za opravljene storitve marec 2012</Tekst2>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- datum izdaje računa -->
+		<DatumiRacuna>
+			<VrstaDatuma>137</VrstaDatuma>
+			<DatumRacuna>2012-04-01T00:00:00.0Z</DatumRacuna>
+		</DatumiRacuna>
+		<!-- valuta računa -->
+		<Valuta>
+			<VrstaValuteRacuna>2</VrstaValuteRacuna>
+			<KodaValute>EUR</KodaValute>
+		</Valuta>
+		<!-- kraj izdaje računa -->
+		<Lokacije>
+			<VrstaLokacije>91</VrstaLokacije>
+			<NazivLokacije>Ljubljana</NazivLokacije>
+		</Lokacije>
+		<!-- rok plačila -->
+		<PlacilniPogoji>
+			<PodatkiORokih>
+				<VrstaPogoja>3</VrstaPogoja>
+			</PodatkiORokih>
+			<PlacilniRoki>
+				<VrstaDatumaPlacilnegaRoka>13</VrstaDatumaPlacilnegaRoka>
+				<Datum>2012-12-15T00:00:00.0Z</Datum>
+			</PlacilniRoki>
+		</PlacilniPogoji>
+		<!-- tekst glava -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>GLAVA_TEKST</Tekst1>
+				<Tekst2>Poljubno besedilo, v katerem se opiše karkoli je za izdajatelja ali na</Tekst2>
+				<Tekst3>ročnika, prejemnika pomembno.</Tekst3>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- obdobje od -->
+		<DatumiRacuna>
+			<VrstaDatuma>263</VrstaDatuma>
+			<DatumRacuna>2012-01-01T00:00:00.0Z</DatumRacuna>
+		</DatumiRacuna>
+		<!-- obdobje do -->
+		<DatumiRacuna>
+			<VrstaDatuma>263</VrstaDatuma>
+			<DatumRacuna>2012-04-30T00:00:00.0Z</DatumRacuna>
+		</DatumiRacuna>
+		<!-- datum storitve -->
+		<DatumiRacuna>
+			<VrstaDatuma>35</VrstaDatuma>
+			<DatumRacuna>2012-03-31T00:00:00.0Z</DatumRacuna>
+		</DatumiRacuna>
+		<!-- opis obdobja -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>OPIS_OBDOBJA</Tekst1>
+				<Tekst2>Prvo četrtletje</Tekst2>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- Subjekti na postavki -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>ZZZ</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>3357287</Tekst1>
+				<Tekst2>IME</Tekst2>
+				<Tekst3>BIROKOP D.O.O.</Tekst3>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<PoljubnoBesedilo>
+			<VrstaBesedila>ZZZ</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>3357287</Tekst1>
+				<Tekst2>NASLOV</Tekst2>
+				<Tekst3>ULICA 15. MAJA 5</Tekst3>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<PoljubnoBesedilo>
+			<VrstaBesedila>ZZZ</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>3357287</Tekst1>
+				<Tekst2>KRAJ</Tekst2>
+				<Tekst3>KOPER-CAPODISTRIA</Tekst3>
+				<Tekst4>6000</Tekst4>
+				<Tekst5>SLOVENIJA</Tekst5>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- Namen pri sklicu-->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>REFERENCA_NAMEN</Tekst1>
+				<Tekst2>01</Tekst2>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- izdajatelj -->
+		<PodatkiPodjetja>
+			<NazivNaslovPodjetja>
+				<VrstaPartnerja>II</VrstaPartnerja>
+				<NazivPartnerja>
+					<NazivPartnerja1>SETCCE</NazivPartnerja1>
+				</NazivPartnerja>
+				<Ulica>
+					<Ulica1>Tehnološki park 21</Ulica1>
+					<Ulica3>Objekt D, nadstropje 4</Ulica3>
+				</Ulica>
+				<Kraj>Ljubljana</Kraj>
+				<NazivDrzave>Slovenija</NazivDrzave>
+				<PostnaStevilka>1000</PostnaStevilka>
+				<KodaDrzave>SI</KodaDrzave>
+			</NazivNaslovPodjetja>
+			<FinancniPodatkiPodjetja>
+				<BancniRacun>
+					<StevilkaBancnegaRacuna>SI56051008013037180</StevilkaBancnegaRacuna>
+					<NazivBanke1>ABANKA</NazivBanke1>
+					<BIC>ABANSI2XXXX</BIC>
+				</BancniRacun>
+			</FinancniPodatkiPodjetja>
+			<ReferencniPodatkiPodjetja>
+				<VrstaPodatkaPodjetja>VA</VrstaPodatkaPodjetja>
+				<PodatekPodjetja>SI39705684</PodatekPodjetja>
+			</ReferencniPodatkiPodjetja>
+			<ReferencniPodatkiPodjetja>
+				<VrstaPodatkaPodjetja>GN</VrstaPodatkaPodjetja>
+				<PodatekPodjetja>1594389</PodatekPodjetja>
+			</ReferencniPodatkiPodjetja>
+			<KontaktiPodjetja>
+				<KontaktnaOseba>
+					<ImeOsebe>Monika Baksa</ImeOsebe>
+				</KontaktnaOseba>
+				<Komunikacije>
+					<StevilkaKomunikacije>38616204500</StevilkaKomunikacije>
+					<VrstaKomunikacije>TE</VrstaKomunikacije>
+				</Komunikacije>
+				<Komunikacije>
+					<StevilkaKomunikacije>38616204555</StevilkaKomunikacije>
+					<VrstaKomunikacije>FX</VrstaKomunikacije>
+				</Komunikacije>
+			</KontaktiPodjetja>
+		</PodatkiPodjetja>
+		<!-- naročnik -->
+		<PodatkiPodjetja>
+			<NazivNaslovPodjetja>
+				<VrstaPartnerja>BY</VrstaPartnerja>
+				<NazivPartnerja>
+					<NazivPartnerja1>Zelo dolg naziv podjetja za prvo vr</NazivPartnerja1>
+					<NazivPartnerja2>stico d.o.o.</NazivPartnerja2>
+					<NazivPartnerja3>Oddelek za naročanje nenavadnega bl</NazivPartnerja3>
+					<NazivPartnerja4>aga</NazivPartnerja4>
+				</NazivPartnerja>
+				<Ulica>
+					<Ulica1>Daleč najdaljša ulica po številu zn</Ulica1>
+					<Ulica2>akov 35A</Ulica2>
+					<Ulica3>Nadstropje 4, vrata 107</Ulica3>
+				</Ulica>
+				<Kraj>Dobrova</Kraj>
+				<NazivDrzave>Slovenija</NazivDrzave>
+				<PostnaStevilka>1356</PostnaStevilka>
+				<KodaDrzave>SI</KodaDrzave>
+			</NazivNaslovPodjetja>
+			<FinancniPodatkiPodjetja>
+				<BancniRacun>
+					<StevilkaBancnegaRacuna>SI56020120090111333</StevilkaBancnegaRacuna>
+					<NazivBanke1>Moja banka d.d.</NazivBanke1>
+					<NazivBanke2>Podružnica center</NazivBanke2>
+					<BIC>LJBASI2XXXX</BIC>
+				</BancniRacun>
+			</FinancniPodatkiPodjetja>
+			<ReferencniPodatkiPodjetja>
+				<VrstaPodatkaPodjetja>VA</VrstaPodatkaPodjetja>
+				<PodatekPodjetja>SI12345678</PodatekPodjetja>
+			</ReferencniPodatkiPodjetja>
+			<ReferencniPodatkiPodjetja>
+				<VrstaPodatkaPodjetja>GN</VrstaPodatkaPodjetja>
+				<PodatekPodjetja>1234567</PodatekPodjetja>
+			</ReferencniPodatkiPodjetja>
+			<ReferencniPodatkiPodjetja>
+				<VrstaPodatkaPodjetja>IT</VrstaPodatkaPodjetja>
+				<PodatekPodjetja>444-55</PodatekPodjetja>
+			</ReferencniPodatkiPodjetja>
+			<KontaktiPodjetja>
+				<KontaktnaOseba>
+					<ImeOsebe>Janka Hočevar</ImeOsebe>
+				</KontaktnaOseba>
+				<Komunikacije>
+					<StevilkaKomunikacije>38616204555</StevilkaKomunikacije>
+					<VrstaKomunikacije>TE</VrstaKomunikacije>
+				</Komunikacije>
+				<Komunikacije>
+					<StevilkaKomunikacije>38616204444</StevilkaKomunikacije>
+					<VrstaKomunikacije>FX</VrstaKomunikacije>
+				</Komunikacije>
+			</KontaktiPodjetja>
+		</PodatkiPodjetja>
+		<!-- prejemnik -->
+		<PodatkiPodjetja>
+			<NazivNaslovPodjetja>
+				<VrstaPartnerja>IV</VrstaPartnerja>
+				<NazivPartnerja>
+					<NazivPartnerja1>Prejemnik d.d.</NazivPartnerja1>
+				</NazivPartnerja>
+				<Ulica>
+					<Ulica1>Mali dol 13</Ulica1>
+				</Ulica>
+				<Kraj>Maribor</Kraj>
+				<NazivDrzave>Slovenija</NazivDrzave>
+				<PostnaStevilka>2000</PostnaStevilka>
+				<KodaDrzave>SI</KodaDrzave>
+			</NazivNaslovPodjetja>
+			<FinancniPodatkiPodjetja>
+				<BancniRacun>
+					<StevilkaBancnegaRacuna>SI56251009727460276</StevilkaBancnegaRacuna>
+					<NazivBanke1>PROBANKA</NazivBanke1>
+					<BIC>PROBSI2XXXX</BIC>
+				</BancniRacun>
+			</FinancniPodatkiPodjetja>
+			<ReferencniPodatkiPodjetja>
+				<VrstaPodatkaPodjetja>VA</VrstaPodatkaPodjetja>
+				<PodatekPodjetja>SI22222222</PodatekPodjetja>
+			</ReferencniPodatkiPodjetja>
+			<ReferencniPodatkiPodjetja>
+				<VrstaPodatkaPodjetja>GN</VrstaPodatkaPodjetja>
+				<PodatekPodjetja>1111111</PodatekPodjetja>
+			</ReferencniPodatkiPodjetja>
+			<KontaktiPodjetja>
+				<KontaktnaOseba>
+					<ImeOsebe>Janez Novak</ImeOsebe>
+				</KontaktnaOseba>
+				<Komunikacije>
+					<StevilkaKomunikacije>38616664500</StevilkaKomunikacije>
+					<VrstaKomunikacije>TE</VrstaKomunikacije>
+				</Komunikacije>
+				<Komunikacije>
+					<StevilkaKomunikacije>38616664500</StevilkaKomunikacije>
+					<VrstaKomunikacije>FX</VrstaKomunikacije>
+				</Komunikacije>
+			</KontaktiPodjetja>
+		</PodatkiPodjetja>
+		<!--referenčni dokumenti -->
+		<ReferencniDokumenti VrstaDokumenta="ON">
+			<StevilkaDokumenta>NAR-2012-512</StevilkaDokumenta>
+			<DatumDokumenta>2012-02-25T00:00:00Z</DatumDokumenta>
+		</ReferencniDokumenti>
+		<ReferencniDokumenti VrstaDokumenta="CT">
+			<StevilkaDokumenta>POG-2012-12</StevilkaDokumenta>
+			<DatumDokumenta>2012-01-05T00:00:00Z</DatumDokumenta>
+		</ReferencniDokumenti>
+		<ReferencniDokumenti VrstaDokumenta="AAK">
+			<StevilkaDokumenta>DOB-2012-12</StevilkaDokumenta>
+			<DatumDokumenta>2012-03-06T00:00:00Z</DatumDokumenta>
+		</ReferencniDokumenti>
+		<!-- postavke računa -->
+		<PostavkeRacuna>
+			<Postavka/>
+			<OpisiArtiklov>
+				<KodaOpisaArtikla>F</KodaOpisaArtikla>
+				<OpisArtikla>
+					<OpisArtikla1>Mizarske storitve</OpisArtikla1>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<OpisiArtiklov>
+				<OpisArtikla>
+					<OpisArtikla1>OZNAKA_POSTAVKE</OpisArtikla1>
+					<OpisArtikla2>opisna</OpisArtikla2>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<KolicinaArtikla>
+				<VrstaKolicine>47</VrstaKolicine>
+				<Kolicina>0</Kolicina>
+				<EnotaMere>PCE</EnotaMere>
+			</KolicinaArtikla>
+			<ZneskiPostavke>
+				<VrstaZneskaPostavke>38</VrstaZneskaPostavke>
+				<ZnesekPostavke>0</ZnesekPostavke>
+			</ZneskiPostavke>
+			<CenaPostavke>
+				<Cena>0</Cena>
+			</CenaPostavke>
+			<DavkiPostavke>
+				<ZneskiDavkovPostavke>
+					<VrstaZneskaDavkaPostavke>124</VrstaZneskaDavkaPostavke>
+				</ZneskiDavkovPostavke>
+			</DavkiPostavke>
+			<!-- Stroskovno mesto postavke -->
+			<StroskovnoMesto>123456</StroskovnoMesto>
+			<!-- Datum ali obdobje dobave na postavki -->
+			<ObdobjeDobave>1.1.-15.1.2012</ObdobjeDobave>
+		</PostavkeRacuna>
+		<PostavkeRacuna>
+			<Postavka>
+				<StevilkaVrstice>1</StevilkaVrstice>
+			</Postavka>
+			<DodatnaIdentifikacijaArtikla>
+				<VrstaPodatkaArtikla>5</VrstaPodatkaArtikla>
+				<StevilkaArtiklaDodatna>444444-5555</StevilkaArtiklaDodatna>
+				<VrstaKodeArtiklaDodatna>SA</VrstaKodeArtiklaDodatna>
+			</DodatnaIdentifikacijaArtikla>
+			<OpisiArtiklov>
+				<KodaOpisaArtikla>F</KodaOpisaArtikla>
+				<OpisArtikla>
+					<OpisArtikla1>Ostanki od rezkanja</OpisArtikla1>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<OpisiArtiklov>
+				<OpisArtikla>
+					<OpisArtikla1>OZNAKA_POSTAVKE</OpisArtikla1>
+					<OpisArtikla2>navadna</OpisArtikla2>
+				</OpisArtikla>
+			</OpisiArtiklov>
+
+			<OpisiArtiklov>
+				<OpisArtikla>
+					<OpisArtikla1>OPIS_ENOTE_MERE</OpisArtikla1>
+					<OpisArtikla2>Škatla</OpisArtikla2>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<KolicinaArtikla>
+				<VrstaKolicine>47</VrstaKolicine>
+				<Kolicina>2</Kolicina>
+				<EnotaMere>PCE</EnotaMere>
+			</KolicinaArtikla>
+			<ZneskiPostavke>
+				<VrstaZneskaPostavke>203</VrstaZneskaPostavke>
+				<ZnesekPostavke>150</ZnesekPostavke>
+			</ZneskiPostavke>
+			<ZneskiPostavke>
+				<VrstaZneskaPostavke>38</VrstaZneskaPostavke>
+				<ZnesekPostavke>149.88</ZnesekPostavke>
+			</ZneskiPostavke>
+			<CenaPostavke>
+				<Cena>75</Cena>
+			</CenaPostavke>
+			<ReferencniDokumentiPostavke>
+				<VrstaDokumentaPostavke>ON</VrstaDokumentaPostavke>
+				<StevilkaDokumentaPostavke>NAR-123</StevilkaDokumentaPostavke>
+				<!-- Datum referenčnega dokumenta postavke -->
+				<DatumDokumenta>2012-03-06T00:00:00Z</DatumDokumenta>
+			</ReferencniDokumentiPostavke>
+			<DavkiPostavke>
+				<DavkiNaPostavki>
+					<VrstaDavkaPostavke>VAT</VrstaDavkaPostavke>
+					<OdstotekDavkaPostavke>22.00</OdstotekDavkaPostavke>
+				</DavkiNaPostavki>
+				<ZneskiDavkovPostavke>
+					<VrstaZneskaDavkaPostavke>125</VrstaZneskaDavkaPostavke>
+					<Znesek>122.85</Znesek>
+				</ZneskiDavkovPostavke>
+				<ZneskiDavkovPostavke>
+					<VrstaZneskaDavkaPostavke>124</VrstaZneskaDavkaPostavke>
+					<Znesek>27.03</Znesek>
+				</ZneskiDavkovPostavke>
+			</DavkiPostavke>
+			<OdstotkiPostavk>
+				<Identifikator>A</Identifikator>
+				<VrstaOdstotkaPostavke>1</VrstaOdstotkaPostavke>
+				<OdstotekPostavke>18.1</OdstotekPostavke>
+				<VrstaZneskaOdstotka>204</VrstaZneskaOdstotka>
+				<ZnesekOdstotka>27.15</ZnesekOdstotka>
+			</OdstotkiPostavk>
+			<!-- Stroskovno mesto postavke -->
+			<StroskovnoMesto>123456</StroskovnoMesto>
+			<!-- Datum ali obdobje dobave na postavki -->
+			<ObdobjeDobave>1.1.-15.1.2012</ObdobjeDobave>
+		</PostavkeRacuna>
+		<PostavkeRacuna>
+			<Postavka>
+				<StevilkaVrstice>2</StevilkaVrstice>
+			</Postavka>
+			<OpisiArtiklov>
+				<KodaOpisaArtikla>F</KodaOpisaArtikla>
+				<OpisArtikla>
+					<OpisArtikla1>Rezkanje</OpisArtikla1>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<OpisiArtiklov>
+				<OpisArtikla>
+					<OpisArtikla1>OZNAKA_POSTAVKE</OpisArtikla1>
+					<OpisArtikla2>navadna</OpisArtikla2>
+				</OpisArtikla>
+			</OpisiArtiklov>
+
+			<OpisiArtiklov>
+				<OpisArtikla>
+					<OpisArtikla1>OPIS_ENOTE_MERE</OpisArtikla1>
+					<OpisArtikla2>Ura</OpisArtikla2>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<KolicinaArtikla>
+				<VrstaKolicine>47</VrstaKolicine>
+				<Kolicina>3</Kolicina>
+				<EnotaMere>HUR</EnotaMere>
+			</KolicinaArtikla>
+			<ZneskiPostavke>
+				<VrstaZneskaPostavke>203</VrstaZneskaPostavke>
+				<ZnesekPostavke>99</ZnesekPostavke>
+			</ZneskiPostavke>
+			<ZneskiPostavke>
+				<VrstaZneskaPostavke>38</VrstaZneskaPostavke>
+				<ZnesekPostavke>97.56</ZnesekPostavke>
+			</ZneskiPostavke>
+			<CenaPostavke>
+				<Cena>33</Cena>
+			</CenaPostavke>
+			<ReferencniDokumentiPostavke>
+				<VrstaDokumentaPostavke>ON</VrstaDokumentaPostavke>
+				<StevilkaDokumentaPostavke>NAR-123</StevilkaDokumentaPostavke>
+				<!-- Datum referenčnega dokumenta postavke -->
+				<DatumDokumenta>2012-03-06T00:00:00Z</DatumDokumenta>
+			</ReferencniDokumentiPostavke>
+			<DavkiPostavke>
+				<DavkiNaPostavki>
+					<VrstaDavkaPostavke>VAT</VrstaDavkaPostavke>
+					<OdstotekDavkaPostavke>9.50</OdstotekDavkaPostavke>
+				</DavkiNaPostavki>
+				<ZneskiDavkovPostavke>
+					<VrstaZneskaDavkaPostavke>125</VrstaZneskaDavkaPostavke>
+					<Znesek>89.1</Znesek>
+				</ZneskiDavkovPostavke>
+				<ZneskiDavkovPostavke>
+					<VrstaZneskaDavkaPostavke>124</VrstaZneskaDavkaPostavke>
+					<Znesek>8.46</Znesek>
+				</ZneskiDavkovPostavke>
+			</DavkiPostavke>
+			<OdstotkiPostavk>
+				<Identifikator>A</Identifikator>
+				<VrstaOdstotkaPostavke>1</VrstaOdstotkaPostavke>
+				<OdstotekPostavke>10</OdstotekPostavke>
+				<VrstaZneskaOdstotka>204</VrstaZneskaOdstotka>
+				<ZnesekOdstotka>9.9</ZnesekOdstotka>
+			</OdstotkiPostavk>
+			<!-- Stroskovno mesto postavke -->
+			<StroskovnoMesto>123457</StroskovnoMesto>
+			<!-- Datum ali obdobje dobave na postavki -->
+			<ObdobjeDobave>1.1.-15.1.2012</ObdobjeDobave>
+		</PostavkeRacuna>
+		<PostavkeRacuna>
+			<Postavka>
+				<StevilkaVrstice>3</StevilkaVrstice>
+			</Postavka>
+			<OpisiArtiklov>
+				<KodaOpisaArtikla>F</KodaOpisaArtikla>
+				<OpisArtikla>
+					<OpisArtikla1>Pakiranje</OpisArtikla1>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<OpisiArtiklov>
+				<OpisArtikla>
+					<OpisArtikla1>OZNAKA_POSTAVKE</OpisArtikla1>
+					<OpisArtikla2>navadna</OpisArtikla2>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<OpisiArtiklov>
+				<OpisArtikla>
+					<OpisArtikla1>SUBJECT_NAROCNIK</OpisArtikla1>
+					<OpisArtikla2>3357287</OpisArtikla2>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<OpisiArtiklov>
+				<OpisArtikla>
+					<OpisArtikla1>SUBJEKT_PREJEMNIK</OpisArtikla1>
+					<OpisArtikla2>3357287</OpisArtikla2>
+				</OpisArtikla>
+			</OpisiArtiklov>
+			<KolicinaArtikla>
+				<VrstaKolicine>47</VrstaKolicine>
+				<Kolicina>1</Kolicina>
+				<EnotaMere>PCE</EnotaMere>
+			</KolicinaArtikla>
+			<ZneskiPostavke>
+				<VrstaZneskaPostavke>203</VrstaZneskaPostavke>
+				<ZnesekPostavke>20</ZnesekPostavke>
+			</ZneskiPostavke>
+			<ZneskiPostavke>
+				<VrstaZneskaPostavke>38</VrstaZneskaPostavke>
+				<ZnesekPostavke>18</ZnesekPostavke>
+			</ZneskiPostavke>
+			<CenaPostavke>
+				<Cena>20</Cena>
+			</CenaPostavke>
+			<ReferencniDokumentiPostavke>
+				<VrstaDokumentaPostavke>ON</VrstaDokumentaPostavke>
+				<StevilkaDokumentaPostavke>NAR-123</StevilkaDokumentaPostavke>
+				<!-- Datum referenčnega dokumenta postavke -->
+				<DatumDokumenta>2012-03-07T00:00:00Z</DatumDokumenta>
+			</ReferencniDokumentiPostavke>
+			<DavkiPostavke>
+				<ZneskiDavkovPostavke>
+					<VrstaZneskaDavkaPostavke>125</VrstaZneskaDavkaPostavke>
+					<Znesek>18</Znesek>
+				</ZneskiDavkovPostavke>
+			</DavkiPostavke>
+			<OdstotkiPostavk>
+				<Identifikator>A</Identifikator>
+				<VrstaOdstotkaPostavke>1</VrstaOdstotkaPostavke>
+				<OdstotekPostavke>10</OdstotekPostavke>
+				<VrstaZneskaOdstotka>204</VrstaZneskaOdstotka>
+				<ZnesekOdstotka>2</ZnesekOdstotka>
+			</OdstotkiPostavk>
+			<!-- Stroskovno mesto postavke -->
+			<StroskovnoMesto>123456</StroskovnoMesto>
+			<!-- Datum ali obdobje dobave na postavki -->
+			<ObdobjeDobave>1.1.-15.1.2012</ObdobjeDobave>
+		</PostavkeRacuna>
+		<!-- povzetek davkov -->
+		<PovzetekDavkovRacuna>
+			<DavkiRacuna>
+				<VrstaDavka>VAT</VrstaDavka>
+				<OdstotekDavka>22</OdstotekDavka>
+			</DavkiRacuna>
+			<ZneskiDavkov>
+				<VrstaZneskaDavka>125</VrstaZneskaDavka>
+				<ZnesekDavka>122.85</ZnesekDavka>
+			</ZneskiDavkov>
+			<ZneskiDavkov>
+				<VrstaZneskaDavka>124</VrstaZneskaDavka>
+				<ZnesekDavka>27.03</ZnesekDavka>
+			</ZneskiDavkov>
+		</PovzetekDavkovRacuna>
+		<PovzetekDavkovRacuna>
+			<DavkiRacuna>
+				<VrstaDavka>VAT</VrstaDavka>
+				<OdstotekDavka>9.5</OdstotekDavka>
+			</DavkiRacuna>
+			<ZneskiDavkov>
+				<VrstaZneskaDavka>125</VrstaZneskaDavka>
+				<ZnesekDavka>89.1</ZnesekDavka>
+			</ZneskiDavkov>
+			<ZneskiDavkov>
+				<VrstaZneskaDavka>124</VrstaZneskaDavka>
+				<ZnesekDavka>8.46</ZnesekDavka>
+			</ZneskiDavkov>
+		</PovzetekDavkovRacuna>
+		<PovzetekDavkovRacuna>
+			<DavkiRacuna/>
+			<ZneskiDavkov>
+				<VrstaZneskaDavka>125</VrstaZneskaDavka>
+				<ZnesekDavka>18</ZnesekDavka>
+			</ZneskiDavkov>
+		</PovzetekDavkovRacuna>
+		<!-- davčni tekst -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>TXD</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>DAVCNI_TEKST</Tekst1>
+				<Tekst2>Posebno besedilo kot ga predpisuje zakonodaja in se nanaša na posebnos</Tekst2>
+				<Tekst3>ti pri obračunu davka na računu, s sklicevanjem na člen itd.</Tekst3>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- dodatni tekst -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>DODATNI_TEKST</Tekst1>
+				<Tekst2>Prosimo, da račun poravnate na transakcijski račun: SI56 9900 0000 372</Tekst2>
+				<Tekst3>2 222 odprt pri Naši banki d.d.. Za nepravočasna plačila zaračunavamo </Tekst3>
+				<Tekst4> z zakonom predpisane zamudne obresti.</Tekst4>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- obrnjena davna obveznost -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>OBRNJENA_DAVCNA_OBVEZNOST</Tekst1>
+				<Tekst2>true</Tekst2>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- fakturist -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>FAKTURIST</Tekst1>
+				<Tekst2>Tone Hojc</Tekst2>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- vrednost postavk brez popustov -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>79</VrstaZneska>
+				<ZnesekRacuna>269</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- vsota popustov -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>53</VrstaZneska>
+				<ZnesekRacuna>13.5</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- osnova za DDV -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>125</VrstaZneska>
+				<ZnesekRacuna>211.95</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- DDV -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>176</VrstaZneska>
+				<ZnesekRacuna>35.49</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- vrednost postavk s popusti in DDV -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>86</VrstaZneska>
+				<ZnesekRacuna>265.44</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- zamudne obresti -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>131</VrstaZneska>
+				<ZnesekRacuna>1.12</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- predplačilo -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>113</VrstaZneska>
+				<ZnesekRacuna>50</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- izravnava -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>165</VrstaZneska>
+				<ZnesekRacuna>-0.01</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- znesek za plačilo -->
+		<PovzetekZneskovRacuna>
+			<ZneskiRacuna>
+				<VrstaZneska>9</VrstaZneska>
+				<ZnesekRacuna>216.55</ZnesekRacuna>
+			</ZneskiRacuna>
+			<SklicZaPlacilo>
+				<SklicPlacila>PQ</SklicPlacila>
+				<StevilkaSklica>SI005026024-70200008-1</StevilkaSklica>
+			</SklicZaPlacilo>
+		</PovzetekZneskovRacuna>
+		<!-- tekst noga -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>AAI</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>NOGA_TEKST</Tekst1>
+				<Tekst2>Pravna oseba SETCCE je vpisana pri Okrožnem sodišču v Ljubljani, št. r</Tekst2>
+				<Tekst3>eg. vpisa 061/13422800, dejavnost:73.102, ustanovitveni vložek 10.432,</Tekst3>
+				<Tekst4>22 EUR.</Tekst4>
+			</Besedilo>
+		</PoljubnoBesedilo>	
+		<!-- davčno potrjevanje -->
+		<PoljubnoBesedilo>
+			<VrstaBesedila>TXD</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>DAVCNO_POTRJEVANJE</Tekst1>
+				<Tekst2>15:03</Tekst2>
+				<Tekst3>PRODAJALEC1</Tekst3>
+				<Tekst4>56dcaf93-933a-497d-b864-0ba1e8f4fa2</Tekst4>
+				<Tekst5>8402f0a963e37b2258e034fc8ae7ffc1 </Tekst5>
+			</Besedilo>
+		</PoljubnoBesedilo>		
+		<PoljubnoBesedilo>
+			<VrstaBesedila>TXD</VrstaBesedila>
+			<Besedilo>
+				<Tekst1>ZOI_VIZUALIZACIJA</Tekst1>
+				<Tekst2>279042272585972554922067893753871413584876543211601021503002</Tekst2>
+			</Besedilo>
+		</PoljubnoBesedilo>
+		<!-- globalni popust/super rabat -->
+		<GlobalniPopusti>
+			<OpisPopusta>SUPER RABAT</OpisPopusta>
+			<TipPopusta>PP</TipPopusta>
+			<OdstotekPopusta>10</OdstotekPopusta>
+			<ZnesekPopusta>25.55</ZnesekPopusta> 
+		</GlobalniPopusti>
+	</Racun>
+</IzdaniRacunEnostavni>
