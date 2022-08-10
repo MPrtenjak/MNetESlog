@@ -1,10 +1,12 @@
 # MNetESlog
 
-## English 
+## English
 
 ### Purpose
 
 This is .NET library for signing Slovenian e-documents using e-SLOG version 1.5, 1.6 or 2.0.
+
+From 2022 you can also sign any XML (non eSlog) documents.
 
 With its help you can:
 
@@ -27,14 +29,14 @@ If you need signed XmlDocument object:
 private XmlDocument doSignIntoXmlDoc()
 {
   // create signing object
-  Sign sign = new Sign();
- 
+  ISign sign = new ESlogSign();
+
   // select unsigned document
   string unsignedDoc = @"c:\documents\unsigned.xml";
- 
+
   // select certificate
   X509Certificate2 certificate = getMyCertificate();
- 
+
   // sign the document
   return sign.Execute(unsignedDoc, certificate, DateTime.Now);
 }
@@ -46,17 +48,17 @@ If you only need signed document on disk:
 private void doSignIntoFile()
 {
   // create signing object
-  Sign sign = new Sign();
- 
+  ISign sign = new ESlogSign();
+
   // select unsigned document
   string unsignedDoc = @"c:\documents\unsigned.xml";
- 
+
   // set (output) signed dokument
   string signedDoc = @"c:\documents\signed.xml";
- 
+
   // select certificate
   X509Certificate2 certificate = getMyCertificate();
- 
+
   // sign the document
   sign.Execute(unsignedDoc, signedDoc, certificate, DateTime.Now);
 }
@@ -70,25 +72,25 @@ If you want to check whether a document is consistent with the e-SLOG scheme, pe
 private void doCheck()
 {
   // create signing object
-  Check check = new Check();
- 
+  ICheck check = new ESlogCheck();
+
   // select unsigned document
   string someDocument = @"c:\documents\document.xml";
- 
+
   if (check.Execute(someDocument))
   {
     // Document is valid
- 
+
     // Use (check.IsSigned) to see if it is signed
   }
   else
   {
     // Dokument is not valid
- 
+
     Console.WriteLine("Errors : ");
     foreach (var error in check.Errors)
       Console.WriteLine(error);
- 
+
     Console.WriteLine("Warnings : ");
     foreach (var warning in check.Warnings)
       Console.WriteLine(warning);
@@ -119,6 +121,8 @@ I got the idea for a solution through questions on codeproject: http://www.codep
 
 To je .NET knjižnica, ki je namenjena podpisovanju slovenskih e-dokumentov, ki uporabljajo e-SLOG verzije 1.5, 1.6 ali 2.0.
 
+Od leta 2022 lahko podpisujete tudi vse dokumente XML (ne eSlog).
+
 Z njeno pomočjo lahko
 
 1.	Podpišete e-dokument
@@ -140,14 +144,14 @@ V kolikor potrebujete podpisan objekt XmlDocument izvedete sledečo kodo
 private XmlDocument doSignIntoXmlDoc()
 {
   // ustvarite objekt za podpisovanje
-  Sign sign = new Sign();
- 
+  ISign sign = new ESlogSign();
+
   // določite vhoden, nepodpisan dokument
   string unsignedDoc = @"c:\documents\unsigned.xml";
- 
+
   // izberete certifikat
   X509Certificate2 certificate = getMyCertificate();
- 
+
   // podpišete dokument
   return sign.Execute(unsignedDoc, certificate, DateTime.Now);
 }
@@ -159,17 +163,17 @@ V kolikor pa preprosto želite samo podpisati dokument v drugo datoteko, pa pove
 private void doSignIntoFile()
 {
   // ustvarite objekt za podpisovanje
-  Sign sign = new Sign();
- 
+  ISign sign = new ESlogSign();
+
   // določite vhoden, nepodpisan dokument
   string unsignedDoc = @"c:\documents\unsigned.xml";
- 
+
   // določite izhoden, podpisan dokument
   string signedDoc = @"c:\documents\signed.xml";
- 
+
   // izberete certifikat
   X509Certificate2 certificate = getMyCertificate();
- 
+
   // podpišete dokument
   sign.Execute(unsignedDoc, signedDoc, certificate, DateTime.Now);
 }
@@ -183,25 +187,25 @@ V kolikor želite preveriti ali je nek dokument skladen s e-SLOG shemo, izvedite
 private void doCheck()
 {
   // ustvarite objekt za preverjanje skladnosti sheme
-  Check check = new Check();
- 
+  ICheck check = new ESlogCheck();
+
   // izberete xml datoteko
   string someDocument = @"c:\documents\document.xml";
- 
+
   if (check.Execute(someDocument))
   {
-    // Dokument je skladen! 
- 
+    // Dokument je skladen!
+
     // Ali je podpisan vidite če uporabite check.IsSigned
   }
   else
   {
     // Dokument ni skladen!
- 
+
     Console.WriteLine("Napake : ");
     foreach (var error in check.Errors)
       Console.WriteLine(error);
- 
+
     Console.WriteLine("Opozorila : ");
     foreach (var warning in check.Warnings)
       Console.WriteLine(warning);
@@ -212,7 +216,7 @@ private void doCheck()
 ### Testni program
 
 Za potrebe testa lahko uporabite tudi testni grafični program MNetESlogGui:
- 
+
 ![Alt desc](https://raw.githubusercontent.com/MPrtenjak/MNetESlog/master/gui.png)
 
 ### Test na spletu

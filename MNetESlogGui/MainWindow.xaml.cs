@@ -29,6 +29,7 @@ namespace MNet.ESlog.Gui
     {
       this.tbInput_alert.Visibility = Visibility.Collapsed;
       this.tbOutput_alert.Visibility = Visibility.Collapsed;
+      this.pnlVisualization.Visibility = Visibility.Visible;
     }
 
     private string getFileName(bool newFile)
@@ -39,20 +40,6 @@ namespace MNet.ESlog.Gui
         dlg = new Microsoft.Win32.SaveFileDialog();
       else
         dlg = new Microsoft.Win32.OpenFileDialog();
-
-      dlg.DefaultExt = ".XML";
-      dlg.Filter = "XML Files (*.xml)|*.xml";
-
-      bool? result = dlg.ShowDialog();
-      if ((result.HasValue) && (result.Value))
-        return dlg.FileName;
-
-      return string.Empty;
-    }
-
-    private string saveFile()
-    {
-      Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
 
       dlg.DefaultExt = ".XML";
       dlg.Filter = "XML Files (*.xml)|*.xml";
@@ -76,7 +63,7 @@ namespace MNet.ESlog.Gui
 
         X509Certificate2Collection collection = store.Certificates;
         X509Certificate2Collection fcollection = collection.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
-        X509Certificate2Collection scollection = X509Certificate2UI.SelectFromCollection(fcollection, "XAdES sample", "Choose a certificate", X509SelectionFlag.SingleSelection);
+        X509Certificate2Collection scollection = X509Certificate2UI.SelectFromCollection(fcollection, "MNetESlog", "Choose a certificate", X509SelectionFlag.SingleSelection);
 
         if (scollection != null && scollection.Count == 1)
         {
@@ -125,8 +112,7 @@ namespace MNet.ESlog.Gui
     private void btnSignClick(object sender, RoutedEventArgs e)
     {
       string xmlInput = this.tbInput.Text;
-      Check check = new Check();
-      if ((string.IsNullOrEmpty(xmlInput)) || (!File.Exists(xmlInput)) || (!check.Execute(xmlInput)))
+      if ((string.IsNullOrEmpty(xmlInput)) || (!File.Exists(xmlInput)) || (signType == SignType.None))
       {
         MessageBox.Show("Napačna vhodna datoteka / Wrong input file");
         return;
@@ -147,8 +133,8 @@ namespace MNet.ESlog.Gui
 
       try
       {
-        Sign sign = new Sign();
-        if (sign.Execute(xmlInput, xmlOutput, this.certificate, DateTime.Now))
+        ISign sign = signType == SignType.ESlog ? (ISign)new ESlogSign() : (ISign)new CustomXmlSign();
+				if (sign.Execute(xmlInput, xmlOutput, this.certificate, DateTime.Now))
         {
           Process.Start(new ProcessStartInfo($"file:///{xmlOutput}"));
           MessageBox.Show("Dokument je digitalno podpisan / Document is signed");
@@ -175,12 +161,37 @@ namespace MNet.ESlog.Gui
         this.tbInput_alert.Visibility = Visibility.Collapsed;
         if ((!string.IsNullOrEmpty(selectedFileName)) && (File.Exists(selectedFileName)))
         {
-          Check check = new Check();
-          bool valid = check.Execute(selectedFileName);
-          this.tbInput_alert.Foreground = (valid) ? new SolidColorBrush(Colors.Orange) : new SolidColorBrush(Colors.Red);
-          this.tbInput_alert.Text = (valid) ? "Dokument je že podpisan / The document is already signed" : "To ni ustrezen dokument / Not a valid file";
-          if ((!valid) || ((valid) && (check.IsSigned)))
-            this.tbInput_alert.Visibility = (File.Exists(selectedFileName)) ? Visibility.Visible : Visibility.Collapsed;
+          ICheck eSlogCheck = new ESlogCheck();
+          bool eSlogValid = eSlogCheck.Execute(selectedFileName);
+          this.pnlVisualization.Visibility = (eSlogValid) ? Visibility.Visible : Visibility.Collapsed;
+
+          if (eSlogValid)
+					{
+            signType = SignType.ESlog;
+            if (eSlogCheck.IsSigned)
+              showInputFileAlert("eSlog: Dokument že podpisan / eSlog: Document already signed", new SolidColorBrush(Colors.Cyan));
+            else
+              showInputFileAlert("To je eSlog dokument / This is eSlog document", new SolidColorBrush(Colors.Black));
+          }
+          else
+					{
+            ICheck customCheck = new CustomXmlCheck();
+            bool xmlValid = customCheck.Execute(selectedFileName);
+
+            if (xmlValid)
+						{
+              signType = SignType.CustomXml;
+              if (customCheck.IsSigned)
+                showInputFileAlert("NI eSlog: Dokument že podpisan / NOT eSlog: document already signed", new SolidColorBrush(Colors.Cyan));
+              else
+                showInputFileAlert("To ni eSlog dokument / This is not eSlog document", new SolidColorBrush(Colors.Black));
+            }
+            else
+						{
+              signType = SignType.None;
+              showInputFileAlert("To ni XMl dokument / This is not XML document", new SolidColorBrush(Colors.Red));
+            }
+          }
         }
       }
 
@@ -193,8 +204,23 @@ namespace MNet.ESlog.Gui
           this.tbOutput_alert.Visibility = (File.Exists(selectedFileName)) ? Visibility.Visible : Visibility.Collapsed;
       }
     }
-    #endregion EventHandlers
 
+		private void showInputFileAlert(string Text, Brush ForegroundBrush)
+		{
+      this.tbInput_alert.Foreground = ForegroundBrush;
+      this.tbInput_alert.Text = Text;
+			this.tbInput_alert.Visibility = Visibility.Visible;
+		}
+		#endregion EventHandlers
+
+		private enum SignType
+		{
+      None,
+      ESlog,
+      CustomXml,
+		}
+
+    private SignType signType = SignType.None;
     private X509Certificate2 certificate = null;
   }
 }

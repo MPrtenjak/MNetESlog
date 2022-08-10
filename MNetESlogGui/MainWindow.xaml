@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MNet.ESlog.Gui"
         mc:Ignorable="d"
-        Title="Slovenski e-račun e-Slog / SLO e-invoices e-Slog" SizeToContent="WidthAndHeight">
+        Title="Slovenski e-račun e-Slog / SLO e-invoices e-Slog" SizeToContent="WidthAndHeight" Width="785">
 
-  <Border BorderBrush="{x:Null}" Padding="10,10,10,0" Background="#FFC8DBEC">
+  <Border BorderBrush="{x:Null}" Padding="10,10,10,0" Background="#FFC8DBEC" Margin="0,0,-16,0">
     <StackPanel>
       <!-- <Border BorderThickness="1" BorderBrush="Black" Margin="10" Padding="10"> -->
       <StackPanel>
-        <TextBlock HorizontalAlignment="Center" FontSize="18"><Bold>Podpiši e-SLOG dokument / Sign e-SLOG document</Bold></TextBlock>
+        <TextBlock HorizontalAlignment="Center" FontSize="16"><Bold>Podpiši e-SLOG ali navaden XML dokument / Sign e-SLOG or custom XML document</Bold></TextBlock>
         <StackPanel Margin="10">
           <Grid>
             <Grid.RowDefinitions>
@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="180" />
-              <ColumnDefinition Width="400" />
+              <ColumnDefinition Width="450" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -67,17 +67,28 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
           </Grid.ColumnDefinitions>
-          <Button x:Name="btnSign" Grid.Row="0" Grid.Column="0" Content=" Podpiši / Sign " MinHeight="30" Width="200" Click="btnSignClick" Margin="0,10,0,10"/>
-          <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock Margin="0,0,5,0"><Bold>Preverite podpisan dokument na / Check signed document on:</Bold></TextBlock>
+					<StackPanel x:Name="pnlVisualization" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+						<TextBlock Margin="0,0,5,0" HorizontalAlignment="Center"><Bold>Za eSlog / For eSlog </Bold></TextBlock>
+						<TextBlock Margin="0,0,5,0"><Bold>Preverite podpisan dokument na / Check signed document on:</Bold></TextBlock>
             <StackPanel Orientation="Horizontal">
               <TextBlock Margin="0,0,5,0"><Italic><Hyperlink NavigateUri="http://proxsign.setcce.si/proXsign/?" RequestNavigate="Hyperlink_RequestNavigate">http://proxsign.setcce.si/proXsign/?</Hyperlink></Italic></TextBlock>
               <TextBlock Margin="0,0,5,0"><Bold>,</Bold></TextBlock>
               <TextBlock Margin="0,0,5,0"><Italic><Hyperlink NavigateUri=" http://www.eracuni.si/vizualizacija" RequestNavigate="Hyperlink_RequestNavigate"> http://www.eracuni.si/vizualizacija</Hyperlink></Italic></TextBlock>
             </StackPanel>
           </StackPanel>
-        </Grid>
-        <Button x:Name="btnClose" Content=" Zapri / Close " MinHeight="30" Width="200" Click="btnCloseClick" Margin="0,30,20,0" HorizontalAlignment="Right"/>
+					<Button x:Name="btnSign" Grid.Row="0" Grid.Column="1" Content=" Podpiši / Sign " MinHeight="30" Width="200" Click="btnSignClick" Margin="0,10,0,10"/>
+				</Grid>
+
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Button x:Name="btnClose" Grid.Row="0" Grid.Column="1" Content=" Zapri / Close " MinHeight="30" Width="200" Click="btnCloseClick" Margin="0,20,0,20"/>
+				</Grid>
       </StackPanel>
       <!-- </Border> -->
 

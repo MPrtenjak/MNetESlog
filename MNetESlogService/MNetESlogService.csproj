@@ -52,8 +52,13 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Services\Certificates.cs" />
-    <Compile Include="Services\Check.cs" />
-    <Compile Include="Services\Sign.cs" />
+    <Compile Include="Services\CustomXmlCheck.cs" />
+    <Compile Include="Services\CustomXmlSign.cs" />
+    <Compile Include="Services\ESlogCheck.cs" />
+    <Compile Include="Services\ESlogSign.cs" />
+    <Compile Include="Services\ICheck.cs" />
+    <Compile Include="Services\ISign.cs" />
+    <Compile Include="Services\XmlValidationResult.cs" />
     <Compile Include="Utils\Hex2Dec.cs" />
     <Compile Include="Utils\Resources.cs" />
     <Compile Include="Utils\XmlExtensions.cs" />
