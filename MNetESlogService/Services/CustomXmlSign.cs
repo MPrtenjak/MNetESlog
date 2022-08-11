@@ -8,6 +8,7 @@ using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using MNet.ESlog.Service.Utils;
@@ -48,7 +49,13 @@ namespace MNet.ESlog.Service.Services
 			XmlDocument doc = sign.Execute(xmlInputFileName, certificate, timeStamp);
 			if (doc == null) return false;
 
-			doc.Save(xmlOutputFileName);
+			if (doc.FirstChild.NodeType == XmlNodeType.XmlDeclaration)
+				doc.RemoveChild(doc.FirstChild);
+
+			XmlTextWriter xmltw = new XmlTextWriter(xmlOutputFileName, new UTF8Encoding(false));
+			doc.WriteTo(xmltw);
+			xmltw.Close();
+
 			return true;
 		}
 
